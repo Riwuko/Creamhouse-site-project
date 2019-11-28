@@ -1,9 +1,19 @@
-{%extends 'base.html'%} 
-
-{%block content%} 
-	<form action ='.' method="post">{%csrf_token%}
-		{{names_form.as_p}}
-		{{ingredient_form.as_p}}
-		<input type='submit' value='Save'/>
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+<script src="{% static 'cosmetics/scripts/addIngredients.js' %}" defer></script>
+{% endblock %}
+{% block content %}
+	<form>
+          <div class="all-ingredients">
+              <div class="single-ingredient">
+                  <div class="single-ingredient-name">
+                      <label for="name">Ingredient Name:</label>
+                      <input type="text" name="ingredient-name">
+                  </div>
+              </div>
+            <input class="add-related-name" type="button" value="Add related name" />
+          </div>
+		<input type="submit" value="Save"/>
 	</form>
-{%endblock%} 
+{% endblock %}

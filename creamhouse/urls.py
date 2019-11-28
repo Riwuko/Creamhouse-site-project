@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from cosmetics.views import AddNewIngredient
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ingredient/add', AddNewIngredient.as_view()),
 ]
