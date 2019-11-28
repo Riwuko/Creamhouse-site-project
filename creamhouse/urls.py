@@ -16,18 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from pages.views import home_view
-from cosmetics.views import ProductCreateView, IngredientCreateView
-from cosmetics.forms import HairCosmeticForm, FaceCosmeticForm, BodyCosmeticForm, IngredientForm
 
 urlpatterns = [
-	path('index/', home_view, name='home'),
     path('admin/', admin.site.urls),
-    #path('product/', hair_detail_view),
- 	path('createf/', ProductCreateView.as_view(form_class=FaceCosmeticForm)),
-    path('create/', ProductCreateView.as_view(form_class=HairCosmeticForm)),
-    path('createb/', ProductCreateView.as_view(form_class=BodyCosmeticForm)),
-    path('createi/', IngredientCreateView.as_view()),
-
-
 ]
