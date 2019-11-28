@@ -45,17 +45,21 @@ class HandsCosmetic(Cosmetic):
 
 
 class Ingredient(models.Model):
-    cosmetic = models.ManyToManyField(Cosmetic)
+    main_name = models.CharField(max_length=50)
+    cosmetic = models.ManyToManyField(Cosmetic, blank=True, null=True)
     description = models.TextField()
     ingredient_type = models.CharField(max_length=3)
     natural = models.BooleanField()
     hypoallergenic = models.BooleanField()
     verified = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f'main name: {self.main_name}'
+
 
 class IngredientNames(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
 
 
 class Company(models.Model):
