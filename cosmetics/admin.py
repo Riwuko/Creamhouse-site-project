@@ -8,7 +8,7 @@ from .models import (
     HairCosmetic,
     HandsCosmetic,
     Ingredient,
-    IngredientNames,
+    IngredientName,
 )
 
 admin.site.register(BodyCosmetic)
@@ -18,4 +18,4 @@ admin.site.register(FeetCosmetic)
 admin.site.register(HairCosmetic)
 admin.site.register(HandsCosmetic)
 admin.site.register(Ingredient)
-admin.site.register(IngredientNames)
+admin.site.register(IngredientName)

@@ -1,12 +1,11 @@
 const addRelatedName = ingredientElement => {
   const newRelatedName = `
-    <div class="single-ingredient-name">
         <label for="name">Related Name:</label>
-        <input type="text" name="ingredient-name">
-    </div>`;
+        <input type="text" name="ingredient-name">`;
   const div = document.createElement('div');
+  div.classList.add('single-ingredient-name-related');
   div.innerHTML = newRelatedName;
-  ingredientElement.parentElement.appendChild(div);
+  ingredientElement.appendChild(div);
 };
 
 document
@@ -28,16 +27,24 @@ const requestPost = async (url, jsonData) => {
   return response.json();
 };
 
-const getIngredientNames = () => {
-  const ingredientNames = [];
-  for (input of document.querySelectorAll('div.single-ingredient-name input')) {
-    ingredientNames.push(input.value);
+const getIngredientData = () => {
+  const ingredient = document.querySelector('div.single-ingredient');
+  const ingredientNamesRelated = [];
+  for (input of document.querySelectorAll('div.single-ingredient-name-related input')) {
+    ingredientNamesRelated.push(input.value);
   }
-  return ingredientNames;
+  return ingredientData = {
+    main_name: ingredient.querySelector('div.single-ingredient-name input').value,
+    description: ingredient.querySelector('div.single-ingredient-description textarea').value,
+    ingredient_type: ingredient.querySelector('div.single-ingredient-type input').value,
+    natural: ingredient.querySelector('div.single-ingredient-natural input').checked,
+    hypoallergenic: ingredient.querySelector('div.single-ingredient-hypoallergenic input').checked,
+    related_names: ingredientNamesRelated,
+  };
 };
 
 const addIngredient = async () => {
-  const jsonData = getIngredientNames();
+  const jsonData = getIngredientData();
   const resp = await requestPost('/ingredient/add', jsonData);
   console.log(resp);
   window.location.replace('/')

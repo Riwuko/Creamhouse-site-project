@@ -7,6 +7,8 @@ from django.views import View
 import jsonschema
 from django.utils.decorators import method_decorator
 
+from cosmetics.models import Ingredient, IngredientName
+
 ingredient_schema = {"type": "array", "names": {"type": "string"}}
 
 
@@ -15,7 +17,7 @@ def validate_ingredients_json(func):
     def wrapper(request, *args, **kwargs):
         try:
             requested_ingredients = json.loads(request.body)
-            jsonschema.validate(requested_ingredients, ingredient_schema)
+            # jsonschema.validate(requested_ingredients, ingredient_schema)
             return func(
                 *args,
                 request=request,
@@ -41,13 +43,17 @@ class AddNewIngredient(View):
     @method_decorator(validate_ingredients_json)
     def post(self, request, requested_ingredients):
         print(requested_ingredients)
+        # main_ingredient = Ingredient.objects.create(
+        #     name=requested_ingredients[0]
+        # )
+        # main_ingredient.save()
+        # related_ingredients = [
+        #     IngredientName(ingredient=main_ingredient, name=name)
+        #     for name in requested_ingredients[1:]
+        # ]
+        # IngredientName.objects.bulk_create(
+        #     related_ingredients, ignore_conflicts=True
+        # )
         return JsonResponse({'message': ':)'})
-        # for i in range(len(requested_ingredients)):
-        #     if i == 0:
-        #         main_ingredient = Ingredients.objects.create(
-        #             main_name=requested_ingredients[i]["name"]
-        #         )
-        #     else:
-        #         IngredientNames.objects.create(
-        #             main_ingredient, name=requested_ingredients[i]["name"]
-        #         )
+
+
