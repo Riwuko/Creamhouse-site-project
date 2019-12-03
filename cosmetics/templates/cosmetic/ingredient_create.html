@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 <script src="{% static 'cosmetics/scripts/addIngredients.js' %}" defer></script>
 {% endblock %}
 {% block content %}
@@ -12,8 +13,8 @@
                       <input type="text" name="ingredient-name">
                   </div>
               </div>
-            <input class="add-related-name" type="button" value="Add related name" />
           </div>
-		<input type="submit" value="Save"/>
+        <input class="add-related-name" type="button" value="Add related name" />
+		<button type="button">Save</button>
 	</form>
 {% endblock %}
