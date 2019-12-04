@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 <script src="{% static 'cosmetics/scripts/addIngredients.js' %}" defer></script>
 {% endblock %}
 {% block content %}
 	<form>
-          <div class="all-ingredients">
-              <div class="single-ingredient">
-                  <div class="single-ingredient-name">
-                      <label for="name">Ingredient Name:</label>
-                      <input type="text" name="ingredient-name">
-                  </div>
+          <div class="single-ingredient">
+              <div class="single-ingredient-name">
+                  <label>Ingredient Name:</label>
+                  <input type="text" name="ingredient-name">
               </div>
-            <input class="add-related-name" type="button" value="Add related name" />
+              <div class="single-ingredient-description">
+                  <label>Ingredient Description:</label>
+                  <textarea></textarea>
+              </div>
+              <div class="single-ingredient-type">
+                  <label>Ingredient Type:</label>
+                  <input type="text" name="ingredient-type">
+              </div>
+              <div class="single-ingredient-natural">
+                  <label>Is natural:</label>
+                  <input type="checkbox" value="natural">
+              </div>
+              <div class="single-ingredient-hypoallergenic">
+                  <label>Is hypoallergenic:</label>
+                  <input type="checkbox" value="hypoallergenic">
+              </div>
           </div>
-		<input type="submit" value="Save"/>
+        <input class="add-related-name" type="button" value="Add related name" />
+		<button type="button">Save</button>
 	</form>
 {% endblock %}
