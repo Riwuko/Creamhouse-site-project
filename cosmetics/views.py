@@ -11,8 +11,7 @@ from cosmetics.validation import validate_ingredients_json
 @method_decorator(login_required, name='dispatch')
 class AddNewIngredient(View):
     def get(self, request):
-        context = {}
-        return render(request, 'cosmetic/ingredient_create.html', context)
+        return render(request, 'cosmetic/ingredient_create.html', {})
 
     @method_decorator(validate_ingredients_json)
     def post(self, request, requested_ingredients):
@@ -25,4 +24,12 @@ class AddNewIngredient(View):
                 for name in related_names
             ]
         )
+        return JsonResponse({'message': ':)'})
+
+
+class AddNewCosmetic(View):
+    def get(self, request):
+        return render(request, 'cosmetic/cosmetic_create.html', {})
+
+    def post(self, request):
         return JsonResponse({'message': ':)'})

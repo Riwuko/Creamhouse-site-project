@@ -10,7 +10,7 @@ class CosmeticProperties(models.Model):
 
 class Cosmetic(models.Model):
     name = models.CharField(max_length=30)
-    target_gender = models.CharField(max_length=1)
+    target_gender = models.CharField(max_length=10)
     verified = models.BooleanField(default=False)
 
     def __str__(self):
@@ -18,29 +18,29 @@ class Cosmetic(models.Model):
 
 
 class FaceCosmetic(Cosmetic):
-    skin_type = models.CharField(max_length=2)
-    time_of_day = models.CharField(max_length=1)
+    skin_type = models.CharField(max_length=50)
+    time_of_day = models.CharField(max_length=50)
     properties = models.ManyToManyField(CosmeticProperties)
 
 
 class HairCosmetic(Cosmetic):
-    hair_type = models.CharField(max_length=1)
-    hair_problem = models.CharField(max_length=1)
+    hair_type = models.CharField(max_length=50)
+    hair_problem = models.CharField(max_length=50)
     properties = models.ManyToManyField(CosmeticProperties)
 
 
 class BodyCosmetic(Cosmetic):
-    skin_type = models.CharField(max_length=2)
+    skin_type = models.CharField(max_length=50)
     properties = models.ManyToManyField(CosmeticProperties)
 
 
 class FeetCosmetic(Cosmetic):
-    skin_type = models.CharField(max_length=2)
+    skin_type = models.CharField(max_length=50)
     properties = models.ManyToManyField(CosmeticProperties)
 
 
 class HandsCosmetic(Cosmetic):
-    skin_type = models.CharField(max_length=2)
+    skin_type = models.CharField(max_length=50)
     properties = models.ManyToManyField(CosmeticProperties)
 
 
