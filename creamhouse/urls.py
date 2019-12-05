@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from cosmetics.views import AddNewIngredient
+from cosmetics.views import AddNewCosmetic, AddNewIngredient
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ingredient/add', AddNewIngredient.as_view()),
+    path('cosmetic/add', AddNewCosmetic.as_view()),
     path(
         'accounts/login/',
         auth_views.LoginView.as_view(template_name='cosmetic/login.html'),
