@@ -47,7 +47,7 @@ const addIngredient = async () => {
   const jsonData = getIngredientData();
   const resp = await requestPost('/ingredient/add', jsonData);
   console.log(resp);
-  window.location.replace('/')
+  // window.location.replace('/')
 };
 
 document
