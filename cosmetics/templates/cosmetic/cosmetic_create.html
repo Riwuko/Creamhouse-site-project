@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+<script src="{% static 'cosmetics/scripts/addCosmetics.js' %}" defer></script>
+{% endblock %} {% block content %}
+<form>
+  <select>
+    <option selected disabled hidden>Choose cosmetic type</option>
+    <option value="body">Body</option>
+    <option value="hair">Hair</option>
+    <option value="hands">Hands</option>
+    <option value="face">Face</option>
+    <option value="feet">Feet</option>
+  </select>
+  <input
+    class="add-next-ingredient"
+    type="button"
+    value="Add next ingredient"
+  />
+  <button type="button">Save</button>
+</form>
+{% endblock %}
