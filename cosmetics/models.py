@@ -48,7 +48,7 @@ class Ingredient(models.Model):
     main_name = models.CharField(max_length=50)
     cosmetic = models.ManyToManyField(Cosmetic, blank=True)
     description = models.TextField()
-    ingredient_type = models.CharField(max_length=3)
+    ingredient_type = models.CharField(max_length=50)
     natural = models.BooleanField()
     hypoallergenic = models.BooleanField()
     verified = models.BooleanField(default=False)
