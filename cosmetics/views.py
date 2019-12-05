@@ -6,11 +6,22 @@ from django.shortcuts import render
 from django.views import View
 import jsonschema
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 
 from cosmetics.models import Ingredient, IngredientName
 
-ingredient_schema = {"type": "array", "names": {"type": "string"}}
-
+ingredient_schema = {
+    'properties': {
+        'main_name':{'type':'string'},
+        'description':{'type':'string'},
+        'ingredient_type:':{'type:':'string'},
+        'natural':{'type':'boolean'},
+        'hypoallergenic':{'type':'boolean'},
+        'related_names':{'type':'array', 'items': {'type': 'string'}},
+    },
+    "required":["main_name","description","ingredient_type","natural","hypoallergenic"]
+}
 
 def validate_ingredients_json(func):
     @wraps(func)
@@ -35,6 +46,7 @@ def validate_ingredients_json(func):
     return wrapper
 
 
+@method_decorator(login_required, name='dispatch')
 class AddNewIngredient(View):
     def get(self, request):
         context = {}
