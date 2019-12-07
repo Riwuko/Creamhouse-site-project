@@ -3,21 +3,24 @@
 <script src="{% static 'cosmetics/scripts/addCosmetics.js' %}" defer></script>
 {% endblock %} {% block content %}
 <form>
-  <select>
-    <option selected disabled hidden>Choose cosmetic type</option>
-    <option value="body">Body</option>
-    <option value="hair">Hair</option>
-    <option value="hands">Hands</option>
-    <option value="face">Face</option>
-    <option value="feet">Feet</option>
-  </select>
+  <div class = cosmetic>
+    <select>
+      <option selected disabled hidden>Choose cosmetic type</option>
+      <option value="body">Body</option>
+      <option value="hair">Hair</option>
+      <option value="hands">Hands</option>
+      <option value="face">Face</option>
+      <option value="feet">Feet</option>
+    </select>
+
+    <div class="single-cosmetic">
+    </div>
+  </div>
   <input
     class="add-next-ingredient"
     type="button"
     value="Add next ingredient"
   />
-    <div class="single-cosmetic">
-    </div>
   <button type="button">Save</button>
 </form>
 {% endblock %}
