@@ -135,7 +135,7 @@ const faceCosmeticForm = `
 ` 
 const hairCosmeticForm = `
     <div class="single-cosmetic-hair-type">
-      <label>Cosmetic Skin Type:</label>
+      <label>Cosmetic hair Type:</label>
         <div>
           <input type="radio" id="high-porosity" name="hair-type">
           <label for="high-porosity">High porosity</label>
