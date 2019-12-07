@@ -196,7 +196,7 @@ const hairCosmeticForm = `
 `
 
 const handsFeetCosmeticForm = `
-    <div class="single-cosmetic-skin-type>"  
+    <div class="single-cosmetic-skin-type">  
       <label>Cosmetic Skin Type:</label>
           <div>
             <input type="radio" id="dry" name="skin-type">
