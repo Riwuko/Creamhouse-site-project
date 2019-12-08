@@ -300,7 +300,7 @@ const getCosmeticData = () => {
   const hairCosmeticData = () => {
     return hairCosmeticJson = { 
       commonCosmeticData,
-      hair_type: cosmetic.querySelector('div.single-cosmetic-hair-type input').value,
+      hair_type: cosmetic.querySelector('div.single-cosmetic-hair-type input').id,
       hair_problem: cosmetic.querySelector('div.single-cosmetic-hair-problem select').value,
     }
   };
@@ -326,13 +326,14 @@ const requestPost = async (url, jsonData) => {
     body: JSON.stringify(jsonData),
     credentials: 'include',
   });
+  console.log(JSON.stringify(jsonData));
   return response.json();
 };
 
 const addCosmetic = async () => {
   const jsonData = getCosmeticData();
-  const resp = await requestPost('/cosmetic/add', jsonData);
   console.log(jsonData);
+  resp = await requestPost('/cosmetic/add', jsonData);
   // window.location.replace('/')
 };
 
