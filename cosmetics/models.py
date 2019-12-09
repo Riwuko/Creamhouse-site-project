@@ -11,6 +11,7 @@ class CosmeticProperties(models.Model):
 class Cosmetic(models.Model):
     name = models.CharField(max_length=30)
     target_gender = models.CharField(max_length=10)
+    description = models.TextField()
     verified = models.BooleanField(default=False)
 
     def __str__(self):

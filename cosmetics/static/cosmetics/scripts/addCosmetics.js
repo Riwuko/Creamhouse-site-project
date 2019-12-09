@@ -140,6 +140,7 @@ const hairCosmeticForm = `
           <input type="radio" id="high-porosity" name="hair-type">
           <label for="high-porosity">High porosity</label>
         </div>
+        <div>
           <input type="radio" id="low-porosity" name="hair-type">
           <label for="low-porosity">Low porosity</label>
         </div>
@@ -300,7 +301,7 @@ const getCosmeticData = () => {
   const hairCosmeticData = () => {
     return hairCosmeticJson = { 
       commonCosmeticData,
-      hair_type: cosmetic.querySelector('div.single-cosmetic-hair-type input').id,
+      hair_type: cosmetic.querySelector('div.single-cosmetic-hair-type input:checked').id,
       hair_problem: cosmetic.querySelector('div.single-cosmetic-hair-problem select').value,
     }
   };
@@ -326,7 +327,6 @@ const requestPost = async (url, jsonData) => {
     body: JSON.stringify(jsonData),
     credentials: 'include',
   });
-  console.log(JSON.stringify(jsonData));
   return response.json();
 };
 
