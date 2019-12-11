@@ -11,6 +11,7 @@ class CosmeticProperties(models.Model):
 class Cosmetic(models.Model):
     name = models.CharField(max_length=30)
     target_gender = models.CharField(max_length=10)
+    description = models.TextField()
     verified = models.BooleanField(default=False)
 
     def __str__(self):
@@ -19,6 +20,7 @@ class Cosmetic(models.Model):
 
 class FaceCosmetic(Cosmetic):
     skin_type = models.CharField(max_length=50)
+    skin_subtype = models.CharField(max_length=50)
     time_of_day = models.CharField(max_length=50)
     properties = models.ManyToManyField(CosmeticProperties)
 

@@ -36,7 +36,7 @@ const getIngredientData = () => {
   return ingredientData = {
     main_name: ingredient.querySelector('div.single-ingredient-name input').value,
     description: ingredient.querySelector('div.single-ingredient-description textarea').value,
-    ingredient_type: ingredient.querySelector('div.single-ingredient-type input').value,
+    ingredient_type: ingredient.querySelector('div.single-ingredient-type select').value,
     natural: ingredient.querySelector('div.single-ingredient-natural input').checked,
     hypoallergenic: ingredient.querySelector('div.single-ingredient-hypoallergenic input').checked,
     related_names: ingredientNamesRelated,
@@ -45,6 +45,7 @@ const getIngredientData = () => {
 
 const addIngredient = async () => {
   const jsonData = getIngredientData();
+  console.log(jsonData);
   const resp = await requestPost('/ingredient/add', jsonData);
   console.log(resp);
   // window.location.replace('/')
