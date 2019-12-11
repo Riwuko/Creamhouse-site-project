@@ -38,7 +38,7 @@ const bodyCosmeticForm = `
     <div class="single-cosmetic-skin-type">
       <label>Cosmetic Skin Type:</label>
         <select class="single-cosmetic-skin-type">
-        <option value="dehydrated" id="dehydrated">Dehydrated skin</option>
+        <option value="dehyderated" id="dehyderated">Dehyderated skin</option>
         <option value="imperfections" id="imperfections">Imperfections</option>
         <option value="inelastic" id="inelastic">Inelastic skin</option>
         <option value="cellulite" id="cellulite">Cellulite</option>
@@ -47,11 +47,11 @@ const bodyCosmeticForm = `
       </select>
     </div>
 
-    <div class="single-cosmetic-propeties">
+    <div class="single-cosmetic-properties">
       <legend>Choose cosmetic properties:</legend>
         <div>
-          <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
-          <label for="moisturizing">Moisturizing</label>
+          <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing"
+          <label for="moisturiing">Moisturiing</label>
         </div>
         <div>
           <input class="property" type="checkbox" id="reviviscent" name="property" value="reviviscent">
@@ -93,7 +93,7 @@ const faceCosmeticForm = `
         <option value="acne">Acne skin</option>
         <option value="contaminated">Contaminated skin</option>
         <option value="allergic">Allergic skin</option>
-        <option value="dehydrated">Dehydrated skin</option>
+        <option value="dehyderated">Dehyderated skin</option>
         <option value="mature">Mature skin</option>
       </select>
     </div>
@@ -110,11 +110,11 @@ const faceCosmeticForm = `
         </div>
     </div>
 
-    <div class = single-cosmetic-propeties>
+    <div class = single-cosmetic-properties>
       <legend>Choose cosmetic properties:</legend>
         <div>
-          <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
-          <label for="moisturizing">Moisturizing</label>
+          <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing"
+          <label for="moisturiing">Moisturizing</label>
         </div>
           <input class="property" type="checkbox" id="reviviscent" name="property" value="reviviscent">
           <label for="reviviscent">Reviviscent</label>
@@ -165,7 +165,7 @@ const hairCosmeticForm = `
         </select>
     </div>
 
-    <div class="single-cosmetic-propeties">
+    <div class="single-cosmetic-properties">
       <legend>Choose cosmetic properties:</legend>
       <div>
         <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
@@ -190,7 +190,7 @@ const hairCosmeticForm = `
         <input class="property" type="checkbox" id="smoothing" name="property" value="smoothing">
         <label for="smoothing">Smoothing</label>
 
-      <input class="property" type="checkbox" id="against-greasiness" name="property" value="greasiness"
+      <input class="property" type="checkbox" id="against-greasiness" name="property" value="against-greasiness"
       <label for="against-greasiness">Against greasiness</label>
     </div>
   </div>
@@ -204,14 +204,14 @@ const handsFeetCosmeticForm = `
             <label for="dry">Dry</label>
             <input type="radio" id="normal" name="skin-type">
             <label for="dry">Normal</label>
-            <input type="radio" id="dehydrated" name="skin-type">
-            <label for="dehydrated">Dehydrated</label>
+            <input type="radio" id="dehyderated" name="skin-type">
+            <label for="dehyderated">Dehyderated</label>
             <input type="radio" id="inelastic" name="skin-type">
             <label for="inelastic">Inelastic</label>
           </div>
     </div>
 
-    <div class="single-cosmetic-propeties" name="single-cosmetic-propeties">
+    <div class="single-cosmetic-properties" name="single-cosmetic-propeties">
       <legend>Choose cosmetic properties:</legend>
         <div>
           <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
@@ -271,7 +271,6 @@ const getCosmeticData = () => {
     name: cosmetic.querySelector('div.single-cosmetic-name input').value,
     description: cosmetic.querySelector('div.single-cosmetic-description textarea').value,
     target_gender: cosmetic.querySelector('div.single-cosmetic-target-gender input:checked').id,
-    properties: cosmeticProperties,
     ingredients: cosmeticIngredients,
   };
 
@@ -279,6 +278,7 @@ const getCosmeticData = () => {
     return bodyHandsFeetCosmeticJson = {
       commonCosmeticData,
       skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type select').value,
+      properties: cosmeticProperties,
     }
   };
 
@@ -286,6 +286,7 @@ const getCosmeticData = () => {
     return handsFeetCosmeticJson = {
       commonCosmeticData,
       skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type input:checked').id,
+      properties: cosmeticProperties,
     }
   };
 
@@ -295,6 +296,7 @@ const getCosmeticData = () => {
       skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type input:checked').id,
       skin_subtype: cosmetic.querySelector('div.single-cosmetic-skin-subtype select').value,
       time_of_day: cosmetic.querySelector('div.single-cosmetic-time-of-day input:checked').id,
+      properties: cosmeticProperties,
     }
   };
 
@@ -303,6 +305,7 @@ const getCosmeticData = () => {
       commonCosmeticData,
       hair_type: cosmetic.querySelector('div.single-cosmetic-hair-type input:checked').id,
       hair_problem: cosmetic.querySelector('div.single-cosmetic-hair-problem select').value,
+      properties: cosmeticProperties,
     }
   };
 
@@ -334,6 +337,7 @@ const addCosmetic = async () => {
   const jsonData = getCosmeticData();
   console.log(jsonData);
   resp = await requestPost('/cosmetic/add', jsonData);
+  console.log(resp)
   // window.location.replace('/')
 };
 

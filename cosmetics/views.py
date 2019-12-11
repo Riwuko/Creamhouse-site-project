@@ -38,7 +38,7 @@ class AddNewCosmetic(View):
     	name = requested_cosmetics['commonCosmeticData'].pop('name')
     	target_gender = requested_cosmetics['commonCosmeticData'].pop('target_gender')
     	description = requested_cosmetics['commonCosmeticData'].pop('description')
-    	properties  = requested_cosmetics['commonCosmeticData'].pop('properties')
+    	properties  = requested_cosmetics.pop('properties')
     	requested_cosmetics.pop('commonCosmeticData')
 
     	properties_objects = []
