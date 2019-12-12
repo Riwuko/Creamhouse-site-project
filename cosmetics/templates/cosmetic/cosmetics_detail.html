@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>name: {{ object.name }}</div>
+<div>tager gender: {{ object.target_gender }}</div>
+<div>description: {{ object.description }}</div>
+<div>verified: {{ object.verified }}</div>
+{% if object.bodycosmetic %}
+    <div>skin_type: {{ object.bodycosmetic.skin_type }}</div>
+    <div>properties: {{ object.bodycosmetic.properties }}</div>
+{% elif object.facecosmetic %}
+    <div>skin_type: {{ object.facecosmetic.skin_type }}</div>
+    <div>skin_subtype: {{ object.facecosmetic.skin_subtype }}</div>
+
+    <div>properties: {{ object.facecosmetic.properties }}</div>
+{% elif object.feetcosmetic %}
+    <div>skin_type: {{ object.feetcosmetic.skin_type }}</div>
+    <div>properties: {{ object.feetcosmetic.properties }}</div>
+{% endif %}
+</body>
+</html>
+
