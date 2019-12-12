@@ -2,17 +2,18 @@ from django.db import models
 
 
 class CosmeticProperties(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return f'name: {self.name}'
 
 
 class Cosmetic(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     target_gender = models.CharField(max_length=10)
     description = models.TextField()
     verified = models.BooleanField(default=False)
+    cosmetic_type = models.CharField(max_length=20)
 
     def __str__(self):
         return f'cosmetic {self.name}'
@@ -47,7 +48,6 @@ class HandsCosmetic(Cosmetic):
 
 
 class Ingredient(models.Model):
-    main_name = models.CharField(max_length=50)
     cosmetic = models.ManyToManyField(Cosmetic, blank=True)
     description = models.TextField()
     ingredient_type = models.CharField(max_length=50)
@@ -56,15 +56,15 @@ class Ingredient(models.Model):
     verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'main name: {self.main_name}'
+        return f'main name: {self.description}'
 
 
 class IngredientName(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=120)
+    name = models.CharField(max_length=120, unique=True)
     website = models.URLField()
     country = models.CharField(max_length=2)

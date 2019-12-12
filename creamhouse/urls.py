@@ -17,7 +17,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from cosmetics.views import AddNewCosmetic, AddNewIngredient
+from cosmetics.views import (
+    AddNewCosmetic,
+    AddNewIngredient,
+    CosmeticDetailView,
+    CosmeticListView,
+)
+from cosmetics.views_api import CheckIngredient, FilterCosmetic
 
 
 urlpatterns = [
@@ -39,4 +45,8 @@ urlpatterns = [
         auth_views.PasswordResetDoneView.as_view(),
         name='password_reset_done',
     ),
+    path('ingredient/check/name', CheckIngredient.as_view()),
+    path('cosmetic', CosmeticListView.as_view()),
+    path('cosmetic/show/<pk>', CosmeticDetailView.as_view()),
+    path('cosmetic/filter', FilterCosmetic.as_view()),
 ]

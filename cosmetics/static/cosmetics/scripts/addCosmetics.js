@@ -1,12 +1,12 @@
 const chooseCosmeticType = document.querySelector('form select');
 const formSpace = document.querySelector('form div.single-cosmetic');
 const changeFormTemplate = () => {
-    const cosmeticType = chooseCosmeticType.value;
-    formSpace.innerHTML = mainCosmeticForm;
-    formSpace.innerHTML += partialCosmeticForm[cosmeticType];
-    formSpace.innerHTML += cosmeticDescription;
+  const cosmeticType = chooseCosmeticType.value;
+  formSpace.innerHTML = mainCosmeticForm;
+  formSpace.innerHTML += partialCosmeticForm[cosmeticType];
+  formSpace.innerHTML += cosmeticDescription;
 
-    console.log(cosmeticType);
+  console.log(cosmeticType);
 };
 chooseCosmeticType.addEventListener('change', changeFormTemplate);
 
@@ -27,7 +27,7 @@ const mainCosmeticForm = `
         </div>
 `;
 
-const cosmeticDescription =  `
+const cosmeticDescription = `
     <div class="single-cosmetic-description">
       <label>Description: </label>
       <textarea></textarea>
@@ -70,7 +70,7 @@ const bodyCosmeticForm = `
           <label for="sunscreen">Sunscreen</label>
         </div>
     </div>
-`
+`;
 const faceCosmeticForm = `
     <div class="single-cosmetic-skin-type">  
       <label>Cosmetic Skin Type: </label>
@@ -132,7 +132,7 @@ const faceCosmeticForm = `
           <label for="sunscreen">Sunscreen</label>
         </div> 
     </div>
-` 
+`;
 const hairCosmeticForm = `
     <div class="single-cosmetic-hair-type">
       <label>Cosmetic hair Type:</label>
@@ -194,7 +194,7 @@ const hairCosmeticForm = `
       <label for="against-greasiness">Against greasiness</label>
     </div>
   </div>
-`
+`;
 
 const handsFeetCosmeticForm = `
     <div class="single-cosmetic-skin-type">  
@@ -226,21 +226,23 @@ const handsFeetCosmeticForm = `
           <label for="sunscreen">Sunscreen</label>
         </div>
     </div>
- `
-    
+ `;
+
 const partialCosmeticForm = {
-   body: bodyCosmeticForm,
-   hair: hairCosmeticForm,
-   hands: handsFeetCosmeticForm,
-   face: faceCosmeticForm,
-   feet: handsFeetCosmeticForm,
+  body: bodyCosmeticForm,
+  hair: hairCosmeticForm,
+  hands: handsFeetCosmeticForm,
+  face: faceCosmeticForm,
+  feet: handsFeetCosmeticForm,
 };
 
-
- const addNextIngredient = ingredientElement => {
+const addNextIngredient = ingredientElement => {
   const newIngredient = `
+        <div class="new-ingredient">
         <label for="name">Add ingredient:</label>
-        <input type="text" name="ingredient-name">`;
+        <input type="text" name="ingredient-name">
+        <ul></ul>
+        </div>`;
   const div = document.createElement('div');
   div.classList.add('next-cosmetic-ingredient');
   div.innerHTML = newIngredient;
@@ -253,69 +255,87 @@ document
     addNextIngredient(document.querySelector('div.single-cosmetic'));
   });
 
-
 const getCosmeticData = () => {
   const cosmeticType = document.querySelector('form select').value;
   const cosmetic = document.querySelector('div.single-cosmetic');
   const cosmeticIngredients = [];
-  for (input of document.querySelectorAll('div.next-cosmetic-ingredient input')) {
+  for (input of document.querySelectorAll(
+    'div.next-cosmetic-ingredient input',
+  )) {
     cosmeticIngredients.push(input.value);
   }
   const cosmeticProperties = [];
   for (input of cosmetic.querySelectorAll('.property:checked')) {
     cosmeticProperties.push(input.value);
   }
-    
-    const commonCosmeticData = {
+
+  const commonCosmeticData = {
     type: cosmeticType,
     name: cosmetic.querySelector('div.single-cosmetic-name input').value,
-    description: cosmetic.querySelector('div.single-cosmetic-description textarea').value,
-    target_gender: cosmetic.querySelector('div.single-cosmetic-target-gender input:checked').id,
+    description: cosmetic.querySelector(
+      'div.single-cosmetic-description textarea',
+    ).value,
+    target_gender: cosmetic.querySelector(
+      'div.single-cosmetic-target-gender input:checked',
+    ).id,
     ingredients: cosmeticIngredients,
   };
 
   const bodyCosmeticData = () => {
-    return bodyHandsFeetCosmeticJson = {
+    return (bodyHandsFeetCosmeticJson = {
       commonCosmeticData,
-      skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type select').value,
+      skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type select')
+        .value,
       properties: cosmeticProperties,
-    }
+    });
   };
 
   const handsFeetCosmeticData = () => {
-    return handsFeetCosmeticJson = {
+    return (handsFeetCosmeticJson = {
       commonCosmeticData,
-      skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type input:checked').id,
+      skin_type: cosmetic.querySelector(
+        'div.single-cosmetic-skin-type input:checked',
+      ).id,
       properties: cosmeticProperties,
-    }
+    });
   };
 
   const faceCosmeticData = () => {
-    return faceCosmeticJson = {
+    return (faceCosmeticJson = {
       commonCosmeticData,
-      skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type input:checked').id,
-      skin_subtype: cosmetic.querySelector('div.single-cosmetic-skin-subtype select').value,
-      time_of_day: cosmetic.querySelector('div.single-cosmetic-time-of-day input:checked').id,
+      skin_type: cosmetic.querySelector(
+        'div.single-cosmetic-skin-type input:checked',
+      ).id,
+      skin_subtype: cosmetic.querySelector(
+        'div.single-cosmetic-skin-subtype select',
+      ).value,
+      time_of_day: cosmetic.querySelector(
+        'div.single-cosmetic-time-of-day input:checked',
+      ).id,
       properties: cosmeticProperties,
-    }
+    });
   };
 
   const hairCosmeticData = () => {
-    return hairCosmeticJson = { 
+    return (hairCosmeticJson = {
       commonCosmeticData,
-      hair_type: cosmetic.querySelector('div.single-cosmetic-hair-type input:checked').id,
-      hair_problem: cosmetic.querySelector('div.single-cosmetic-hair-problem select').value,
+      hair_type: cosmetic.querySelector(
+        'div.single-cosmetic-hair-type input:checked',
+      ).id,
+      hair_problem: cosmetic.querySelector(
+        'div.single-cosmetic-hair-problem select',
+      ).value,
       properties: cosmeticProperties,
-    }
+    });
   };
 
-  if (cosmeticType == "body"){ 
+  if (cosmeticType == 'body') {
     return bodyCosmeticData();
-  }else if (cosmeticType == "face"){
+  } else if (cosmeticType == 'face') {
     return faceCosmeticData();
-  }else if (cosmeticType == "hair"){
+  } else if (cosmeticType == 'hair') {
     return hairCosmeticData();
-  }else if (cosmeticType == "hands" || cosmeticType == "feet"){
+  } else if (cosmeticType == 'hands' || cosmeticType == 'feet') {
     return handsFeetCosmeticData();
   }
 };
@@ -337,10 +357,8 @@ const addCosmetic = async () => {
   const jsonData = getCosmeticData();
   console.log(jsonData);
   resp = await requestPost('/cosmetic/add', jsonData);
-  console.log(resp)
+  console.log(resp);
   // window.location.replace('/')
 };
 
-document
-  .querySelector('form button')
-  .addEventListener('click', addCosmetic);
+document.querySelector('form button').addEventListener('click', addCosmetic);
