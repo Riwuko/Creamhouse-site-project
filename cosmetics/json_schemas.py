@@ -90,7 +90,7 @@ cosmetics_basic_filters_schema = {
         "type",
         "target_gender",
     ],
-};
+}
 
 def hands_feet_cosmetic_schema(withFilters=False):
     if (withFilters):
@@ -115,12 +115,13 @@ def hands_feet_cosmetic_schema(withFilters=False):
                 'maxLength': 50
                 },
         },
-        'commonCosmeticData': {'type': 'object', **param}
+        **param
     },
     "required": [
         "skin_type",
         "properties",
-        "commonCosmeticData",
+        "type",
+        "targer_gender"
     ],
     }
     return hands_feet_cosmetic_schema
