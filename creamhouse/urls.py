@@ -22,6 +22,8 @@ from cosmetics.views import (
     AddNewIngredient,
     CosmeticDetailView,
     CosmeticListView,
+    IngredientDetailView,
+    IngredientListView,
 )
 from cosmetics.views_api import CheckIngredient, FilterCosmetic
 
@@ -49,4 +51,6 @@ urlpatterns = [
     path('cosmetic', CosmeticListView.as_view()),
     path('cosmetic/show/<pk>', CosmeticDetailView.as_view()),
     path('cosmetic/filter', FilterCosmetic.as_view()),
+    path('ingredient', IngredientListView.as_view()),
+    path('ingredient/show/<pk>', IngredientDetailView.as_view()),
 ]

@@ -32,16 +32,20 @@ def validate_cosmetic_json(func):
         try:
             requested_cosmetics= json.loads(request.body)
             typ = requested_cosmetics['commonCosmeticData']['type' ]
-            print(requested_cosmetics)
+            
             print(typ)
             if (typ=="body"):
-                jsonschema.validate(requested_cosmetics,body_cosmetic_schema)
+                body_schema = body_cosmetic_schema()
+                jsonschema.validate(requested_cosmetics,body_schema)
             elif (typ=="hands" or typ=="feet"):
-                jsonschema.validate(requested_cosmetics,hands_feet_cosmetic_schema)
+                hands_feet_schema = hands_feet_cosmetic_schema()
+                jsonschema.validate(requested_cosmetics,hands_feet_schema)
             elif typ=="hair":
-                jsonschema.validate(requested_cosmetics,hair_cosmetic_schema)
+                hair_schema = hair_cosmetic_schema()
+                jsonschema.validate(requested_cosmetics,hair_schema)
             elif typ=="face":
-                jsonschema.validate(requested_cosmetics,face_cosmetic_schema)
+                face_schema = face_cosmetic_schema()
+                jsonschema.validate(requested_cosmetics,face_schema)
             else:
                 return JsonResponse(
                 {'status': 400, 'error_message': 'wrong type'}, status=400)

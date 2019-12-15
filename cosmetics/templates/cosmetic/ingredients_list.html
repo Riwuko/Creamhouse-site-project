@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load static %} {% block scripts %}
+<script src="{% static 'cosmetics/scripts/ingredientsList.js' %}" defer></script>
+{% endblock %} {% block content %}
+<body>
+	<form>
+	  <div class = ingredients>
+	  	<div class="ingredients-filters">
+	  		<div>
+	      		<span class="ingredients-filters"><label>Ingredients types:</label></span>
+
+	      		<span class="ingredients-filters-checkbox"><label class=checkbox-label>Natural:</label> 
+	      		<span class="checkbox">
+	      		<input class="ingredients-filters-natural" type="checkbox" id="natural" value="natural"> </span>
+	      		</span>
+	      		<span class="ingredients-filters-checkbox"><label class=checkbox-label>Hypoallergenic:</label>
+	      		<span class="checkbox">
+	      		<input class="ingredients-filters-hypoallergenic" type="checkbox" id="hypoallergenic" value="hypoallergenic"></span></span>
+	  		</div>
+
+	  	</div>
+	     <select class="ingredients-filters-types">
+	     	<option selected value="all">All</option>
+	        <option value="preservative">Preservative</option>
+	        <option value="emolient">Emolient</option>
+	        <option value="emulsifier">Emulsifier</option>
+	        <option value="extract">Extract</option>
+	        <option value="solvent">Solvent</option>
+	        <option value="antioxidant">Antioxidant</option>
+	        <option value="consistency">Consistency</option>
+	        <option value="chelating">Chelating</option>
+	        <option value="fragrance">Fragrance</option>
+	        <option value="antibacterial">Antibacterial</option>
+	        <option value="ph-regulator">PH Regulator</option>
+	        <option value="vitamin">Vitamin</option>
+	        <option value="sunscreen">Sunscreen</option>
+	        <option value="moisturizing">Moisturizing</option>
+	        <option value="cleansing">Cleansing</option>
+	      </select>
+	    </div>
+
+	 	<div class=ingredients-chosen-filters>
+	 	</div>
+	  
+	  </div>
+	  
+	</form>
+
+<h1>{{ object_type|title }}</h1>
+<ul>
+
+{% for ingredient in object_list%}
+    <li><a href="/ingredient/show/{{ ingredient.pk }}"> 
+    </a>{{findName}}</li>
+{% empty %}
+    <li>No {{ object_type }} yet.</li>
+{% endfor %}
+
+</ul>
+</body>
+
+<script type="text/javascript">
+	function findName(){
+		for (nameItem in {{ingredients_names}}){
+			console.log(nameItem.name);
+
+		}};
+</script>
+
+{% endblock %}

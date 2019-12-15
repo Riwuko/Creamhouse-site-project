@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -124,7 +125,35 @@ class CosmeticListView(ListView):
         context['object_type'] = 'cosmetics'
         return context
 
-
 class CosmeticDetailView(DetailView):
     model = Cosmetic
     template_name = 'cosmetic/cosmetics_detail.html'
+
+
+class IngredientListView(ListView):
+    model = Ingredient
+    template_name = 'cosmetic/ingredients_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ingredients = IngredientName.objects.all()
+        context['object_type'] = 'ingredients'
+        context['ingredients_names'] = ingredients
+        return context
+
+
+class IngredientDetailView(DetailView):
+    model = Ingredient
+    template_name = 'cosmetic/ingredient_detail.html'
+
+    def get_context_data(self, **kwargs):
+        self.object = self.get_object()
+        context = super().get_context_data(**kwargs)
+        pk = self.object.pk
+        ingredient_names = IngredientName.objects.filter(ingredient=pk).all()
+        names=[]
+        for ingredient in ingredient_names:
+            names.append(ingredient.name)
+        print(names)
+        context["ingredient_names"] = names
+        return context

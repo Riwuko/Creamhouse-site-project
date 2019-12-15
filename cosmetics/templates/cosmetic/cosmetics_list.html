@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %} {% load static %} {% block scripts %}
+<script src="{% static 'cosmetics/scripts/cosmeticsList.js' %}" defer></script>
+{% endblock %} {% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<form>
+	<div class="cosmetics">
+		<div class="cosmetics-filters">
+			<div>
+	      		<span class="cosmetics-filters"><label class=filters-label>Cosmetics types:</label></span>
+
+	      		<span class="cosmetics-filters"><label class=filters-label>Target gender:</label></span>
+	  		</div>
+	  		<div>
+	  			<span class="cosmetics-filters">
+	  			<select class="cosmetics-filters-types">
+			      <option selected value="all">All</option>
+			      <option value="body">Body</option>
+			      <option value="hair">Hair</option>
+			      <option value="hands">Hands</option>
+			      <option value="face">Face</option>
+			      <option value="feet">Feet</option>
+			    </select> </span>
+
+			    <span class="cosmetics-filters">
+			    <select class="cosmetics-filters-target-gender">
+			      <option selected value="both">Both</option>
+			      <option value="male">Male</option>
+			      <option value="female">Female</option>
+			    </select></span>
+
+	  		</div>
+
+	  		<div class=cosmetics-chosen-filters>
+	 	</div>
+
+		</div>
+	</div>
+</form>
+
 <h1>{{ object_type|title }}</h1>
 <ul>
 {% for cosmetic in object_list %}
@@ -14,4 +50,5 @@
 {% endfor %}
 </ul>
 </body>
-</html>
+
+{% endblock %}
