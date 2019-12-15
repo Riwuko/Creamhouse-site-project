@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+
 <script src="{% static 'cosmetics/scripts/addCosmetics.js' %}" defer></script>
 {% endblock %} {% block content %}
 <form>
@@ -23,4 +23,7 @@
   />
   <button type="button">Save</button>
 </form>
+
+    <input class="awesomplete"
+       data-list="Ada, Java, JavaScript, Brainfuck, LOLCODE, Node.js, Ruby on Rails" />
 {% endblock %}

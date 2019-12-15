@@ -6,7 +6,6 @@ const changeFormTemplate = () => {
   const cosmeticsTargetGender = chooseCosmeticsTargetGender.value;
 
   formSpace.innerHTML = cosmeticsMoreFilters[cosmeticsType];
-  changeCosmeticsFilters();
 
   console.log(cosmeticsType, cosmeticsTargetGender);
 };
@@ -106,7 +105,7 @@ const hairCosmeticsFilters = `
       <div>
       	<span class="cosmetics-filters">
 	  		<select class="cosmetics-filters-hair-type">
-	  			<option selected value="all-porosity">All porosity</option>
+	  			<option selected value="all">All porosity</option>
 				<option value="high-porosity">High porosity</option>
 		        <option value="low-porosity">Low porosity</option>
 		        <option value="medium-porosity">Medium porosity</option>
@@ -114,7 +113,7 @@ const hairCosmeticsFilters = `
 
 		<span class="cosmetics-filters">
 	        <select class="cosmetics-filters-hair-problem">
-	          <option selected value="all-hair">All hair</option>
+	          <option selected value="all">All hair</option>
 	          <option value="weak">Weak hair</option>
 	          <option value="colored">Colored hair</option>
 	          <option value="dandruff">Dandruff</option>
@@ -182,44 +181,44 @@ const getCosmeticsFiltersData = () => {
  	const cosmetic = document.querySelector('div.cosmetics');
 
 	const commonCosmeticsData = {
-    	type: cosmeticsType,
+    	cosmetic_type: cosmeticsType,
     	target_gender: cosmeticsTargetGender,
   	};
 
   	const bodyCosmeticData = () => {
     return (bodyHandsFeetCosmeticJson = {
-      commonCosmeticsData,
-      skin_type: cosmetic.querySelector('select.cosmetics-filters-skin-type').value,
-      properties: cosmetic.querySelector('select.cosmetics-filters-properties').value,
+      ...commonCosmeticsData,
+      bodycosmetic__skin_type: cosmetic.querySelector('select.cosmetics-filters-skin-type').value,
+      bodycosmetic__properties__name: cosmetic.querySelector('select.cosmetics-filters-properties').value,
       
     });
   };
 
   const handsFeetCosmeticData = () => {
     return (handsFeetCosmeticJson = {
-      commonCosmeticsData,
-      skin_type: cosmetic.querySelector('select.cosmetics-filters-skin-type').value,
-      properties: cosmetic.querySelector('select.cosmetics-filters-properties').value,
+      ...commonCosmeticsData,
+      handscosmetic__skin_type: cosmetic.querySelector('select.cosmetics-filters-skin-type').value,
+      handscosmetic__properties__name: cosmetic.querySelector('select.cosmetics-filters-properties').value,
       
     });
   };
 
   const faceCosmeticData = () => {
     return (faceCosmeticJson = {
-      commonCosmeticsData,
-      skin_type: cosmetic.querySelector('select.cosmetics-filters-skin-type').value,
-      time_of_day: cosmetic.querySelector('select.cosmetics-filters-time-of-day').value,
-      skin_subtype: cosmetic.querySelector('select.cosmetics-filters-skin-subtype').value,
-      properties: cosmetic.querySelector('select.cosmetics-filters-properties').value,
+      ...commonCosmeticsData,
+      facecosmetic__skin_type: cosmetic.querySelector('select.cosmetics-filters-skin-type').value,
+      facecosmetic__time_of_day: cosmetic.querySelector('select.cosmetics-filters-time-of-day').value,
+      facecosmetic__skin_subtype: cosmetic.querySelector('select.cosmetics-filters-skin-subtype').value,
+      facecosmetic__properties__name: cosmetic.querySelector('select.cosmetics-filters-properties').value,
     });
   };
 
   const hairCosmeticData = () => {
     return (hairCosmeticJson = {
-      commonCosmeticsData,
-	  hair_type: cosmetic.querySelector('select.cosmetics-filters-hair-type').value,      
-	  hair_problem: cosmetic.querySelector('select.cosmetics-filters-hair-problem').value,
-      properties: cosmetic.querySelector('select.cosmetics-filters-properties').value,
+      ...commonCosmeticsData,
+	  haircosmetic__hair_type: cosmetic.querySelector('select.cosmetics-filters-hair-type').value,
+	  haircosmetic__hair_problem: cosmetic.querySelector('select.cosmetics-filters-hair-problem').value,
+      haircosmetic__properties__name: cosmetic.querySelector('select.cosmetics-filters-properties').value,
     });
   };
 
@@ -237,7 +236,7 @@ const getCosmeticsFiltersData = () => {
 
 
 
- const requestPost = async (url, jsonData) => {
+const requestPost = async (url, jsonData) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -250,9 +249,25 @@ const getCosmeticsFiltersData = () => {
   return response.json();
 };
 
-const changeCosmeticsFilters = async () => {
-  const jsonData = getCosmeticsFiltersData();
-  console.log(jsonData);
-  // resp = await requestPost('/cosmetic/add', jsonData);
-  // console.log(resp);
+
+
+const showFilteredCosmetics = response => {
+  cosmetics = [];
+  for (cosmeticPk in response) {
+    cosmetics.push(`<li><a href="/cosmetic/show/${cosmeticPk}">${response[cosmeticPk]}</a></li>`)
+  }
+  return cosmetics.join('');
 };
+const changeCosmeticFilters = async () => {
+  const jsonData = getCosmeticsFiltersData();
+  const url = '/cosmetic/filter';
+  const response = await requestPost(url, jsonData);
+  const filteredCosmetics = showFilteredCosmetics(response);
+  const cosmeticsList = document.querySelector('ul');
+  cosmeticsList.innerHTML = filteredCosmetics;
+};
+
+const filterButton = document.querySelector('form button');
+filterButton.addEventListener('click', changeCosmeticFilters);
+
+
