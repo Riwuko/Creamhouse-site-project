@@ -138,12 +138,6 @@ class IngredientListView(ListView):
         queryset = super().get_queryset()
         queryset = queryset.distinct('ingredient')
         return queryset
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     ingredients = IngredientName.objects.all()
-    #     context['object_type'] = 'ingredients'
-    #     context['ingredients_names'] = ingredients
-    #     return context
 
 
 class IngredientDetailView(DetailView):

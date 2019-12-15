@@ -17,15 +17,16 @@ class CheckIngredient(View):
 
 
 import json
+
+
 class FilterCosmetic(View):
-    def get(self, request):
-        # j = json.loads(request.body)
-        j = {
-            'cosmetic_type': 'hair',
-            'target_gender': 'Female',
-            'haircosmetic__hair_type': 'high-porosity',
-            'haircosmetic__hair_problem': 'colored',
+    def post(self, request):
+        json_data = json.loads(request.body)
+        print(json_data)
+        filter_values = {
+            key: value for key, value in json_data.items() if value != 'all'
         }
-        d = Cosmetic.objects.filter(**j)
-        print(d)
-        return JsonResponse({})
+        print(filter_values)
+        cosmetics_queryset = Cosmetic.objects.filter(**filter_values)
+        filtered_cosmetics = {cosmetic.pk: cosmetic.name for cosmetic in cosmetics_queryset}
+        return JsonResponse(filtered_cosmetics)
