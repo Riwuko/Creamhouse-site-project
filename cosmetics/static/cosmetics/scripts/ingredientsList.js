@@ -27,7 +27,7 @@ const getIngredientsFiltersData = () => {
   	}
 };
 
- const requestPost = async (url, jsonData) => {
+const requestPost = async (url, jsonData) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -40,11 +40,5 @@ const getIngredientsFiltersData = () => {
   return response.json();
 };
 
-const changeIngredientsFilters = async () => {
-  const jsonData = getIngredientsFiltersData();
-  console.log(jsonData);
-  // resp = await requestPost('/cosmetic/add', jsonData);
-  // console.log(resp);
-};
 
 

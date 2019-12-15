@@ -237,6 +237,14 @@ const partialCosmeticForm = {
   feet: handsFeetCosmeticForm,
 };
 
+const changeSuggestions = async ingredientId => {
+  const inputElement = document.querySelector(`div#${ingredientId} input`)
+  const inputValue = inputElement.value;
+  const { ingredients } = await requestGet('/ingredient/check/name', `ingredient=${inputValue}`);
+  // inputElement.setAttribute('data-list', ingredients);
+};
+
+window.ingredientId = 1;
 const addNextIngredient = ingredientElement => {
   const newIngredient = `
         <div class="new-ingredient">
@@ -246,10 +254,16 @@ const addNextIngredient = ingredientElement => {
         </div>`;
   const div = document.createElement('div');
   div.classList.add('next-cosmetic-ingredient');
+  const ingredientId = `ingredient${window.ingredientId}`;
+  div.setAttribute('id', ingredientId);
   div.innerHTML = newIngredient;
   ingredientElement.appendChild(div);
+  ingredientInput = document.querySelector(`div#${ingredientId} input`);
+  ingredientInput.addEventListener('input', () => {
+    changeSuggestions(ingredientId);
+  });
+  window.ingredientId += 1;
 };
-
 document
   .querySelector('input.add-next-ingredient')
   .addEventListener('click', () => {
@@ -339,6 +353,13 @@ const getCosmeticData = () => {
   } else if (cosmeticType == 'hands' || cosmeticType == 'feet') {
     return handsFeetCosmeticData();
   }
+};
+const requestGet = async (url, querystring) => {
+  const response = await fetch(`${url}?${querystring}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+  return response.json();
 };
 
 const requestPost = async (url, jsonData) => {
