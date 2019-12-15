@@ -5,21 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-<div>name: {{ object.name }}</div>
-<div>tager gender: {{ object.target_gender }}</div>
-<div>description: {{ object.description }}</div>
-<div>verified: {{ object.verified }}</div>
+<div>Name: {{ object.name }}</div>
+<div>Tager gender: {{ object.target_gender }}</div>
+<div>Description: {{ object.description }}</div>
+<div>Verified: {{ object.verified }}</div>
 {% if object.bodycosmetic %}
-    <div>skin_type: {{ object.bodycosmetic.skin_type }}</div>
-    <div>properties: {{ object.bodycosmetic.properties }}</div>
+    <div>Skin_type: {{ object.bodycosmetic.skin_type }}</div>
+    <div>Properties: {{ object.bodycosmetic.properties }}</div>
 {% elif object.facecosmetic %}
-    <div>skin_type: {{ object.facecosmetic.skin_type }}</div>
-    <div>skin_subtype: {{ object.facecosmetic.skin_subtype }}</div>
-
-    <div>properties: {{ object.facecosmetic.properties }}</div>
+    <div>Skin_type: {{ object.facecosmetic.skin_type }}</div>
+    <div>Skin_subtype: {{ object.facecosmetic.skin_subtype }}</div>
+    <div>Time_of_day: {{ object.facecosmetic.time_of_day  }}</div>
+    <div>Properties: {{ object.facecosmetic.properties }}</div>
 {% elif object.feetcosmetic %}
-    <div>skin_type: {{ object.feetcosmetic.skin_type }}</div>
-    <div>properties: {{ object.feetcosmetic.properties }}</div>
+    <div>Skin_type: {{ object.feetcosmetic.skin_type }}</div>
+    <div>Properties: {{ object.feetcosmetic.properties }}</div>
+{% elif object.handscosmetic %}
+    <div>Skin_type: {{ object.handscosmetic.skin_type }}</div>
+    <div>Properties: {{ object.handscosmetic.properties }}</div>
+{% elif object.haircosmetic %}
+    <div>Hair_type: {{ object.haircosmetic.hair_type }}</div>
+    <div>Hair_problem: {{ object.haircosmetic.hair_problem }}</div>
+    <div>Properties: {{ object.haircosmetic.properties }}</div>
 {% endif %}
 </body>
 </html>

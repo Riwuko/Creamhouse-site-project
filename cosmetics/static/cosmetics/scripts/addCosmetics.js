@@ -50,8 +50,8 @@ const bodyCosmeticForm = `
     <div class="single-cosmetic-properties">
       <legend>Choose cosmetic properties:</legend>
         <div>
-          <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing"
-          <label for="moisturiing">Moisturiing</label>
+          <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing">
+          <label for="moisturiing">Moisturizing</label>
         </div>
         <div>
           <input class="property" type="checkbox" id="reviviscent" name="property" value="reviviscent">
@@ -87,6 +87,7 @@ const faceCosmeticForm = `
     </div>
 
     <div class = "single-cosmetic-skin-subtype">
+    <label>Cosmetic Skin Subtype: </label>
       <select class="single-cosmetic-skin-subtype">
         <option value="capillaries">Capillaries skin</option>
         <option value="sensitive">Sensitive skin</option>
