@@ -131,15 +131,19 @@ class CosmeticDetailView(DetailView):
 
 
 class IngredientListView(ListView):
-    model = Ingredient
+    model = IngredientName
     template_name = 'cosmetic/ingredients_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        ingredients = IngredientName.objects.all()
-        context['object_type'] = 'ingredients'
-        context['ingredients_names'] = ingredients
-        return context
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.distinct('ingredient')
+        return queryset
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     ingredients = IngredientName.objects.all()
+    #     context['object_type'] = 'ingredients'
+    #     context['ingredients_names'] = ingredients
+    #     return context
 
 
 class IngredientDetailView(DetailView):

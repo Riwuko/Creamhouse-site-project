@@ -56,7 +56,7 @@ class Ingredient(models.Model):
     verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'main name: {self.description}'
+        return f'ingredient description: {self.description}'
 
 
 class IngredientName(models.Model):

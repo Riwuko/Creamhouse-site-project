@@ -49,8 +49,8 @@
 <ul>
 
 {% for ingredient in object_list%}
-    <li><a href="/ingredient/show/{{ ingredient.pk }}"> 
-    </a>{{findName}}</li>
+    <li><a href="/ingredient/show/{{ ingredient.pk }}">
+    </a>{{ingredient.name}}</li>
 {% empty %}
     <li>No {{ object_type }} yet.</li>
 {% endfor %}
@@ -58,12 +58,5 @@
 </ul>
 </body>
 
-<script type="text/javascript">
-	function findName(){
-		for (nameItem in {{ingredients_names}}){
-			console.log(nameItem.name);
-
-		}};
-</script>
 
 {% endblock %}
