@@ -27,7 +27,7 @@ img {
   margin-top: 8px;
 }
 
-.ingredients-filters {
+/*.ingredients-filters {
  	margin-right: 80px;
 }
 
@@ -45,11 +45,22 @@ img {
 
 .checkbox{
 	margin-right: 80px;
-}
+}*/
  
-.filters-label {
+/*.filters-label {
     width: 160px !important;
     display: inline-block;
+}*/
+
+.flex-container{
+  display: -webkit-flex;
+  display: flex;
+
+}
+
+.flex-item{
+  margin-right: 10px;
+  padding: 10px;
 }
 
 select {
@@ -58,6 +69,7 @@ select {
 
 a {
 	color: #d28831;
+  text-decoration: none;
 }
 
 .sidebar-icons {
@@ -91,18 +103,24 @@ a {
 
 .smaller_sidebar {
 	visibility: hidden;
-	margin: 0;
-    padding: 5px;
-    height: 50px;
- 	width: 100%;
-  	background-color: #88af80;
-  	position: fixed;
-  	overflow: auto;
-}
-.smaller_sidebar a{
-	color: #ffffff;
+  height: 40px;
+  width: 100%;
+  background-color: #88af80;
+  text-align: center;
 }
 
+.smaller_sidebar span{
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.smaller_sidebar a{
+	color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
 
 @media screen and (max-width: 700px) {
   .full_sidebar {visibility: hidden;}
@@ -113,8 +131,15 @@ a {
   div.content {margin-left: 10px;}
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 555px) {
   .full_sidebar {visibility: hidden;}
-  .full_sidebar a {visability:hidden;}
+  .full_sidebar a {visibility:hidden;}
+  .smaller_sidebar span{
+    margin-right: 5px;
+    padding: 5px;
+  }
+  .smaller_sidebar a{
+      font-size: 12px;
+  }
   div.content {margin: 1px;}
 }
