@@ -2,6 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 <script src="{% static 'cosmetics/scripts/addIngredients.js' %}" defer></script>
 {% endblock %} {% block content %}
+<div class = "content">
 <form>
   <div class="single-ingredient">
     <div class="single-ingredient-name">
@@ -44,4 +45,5 @@
   <input class="add-related-name" type="button" value="Add related name" />
   <button type="button">Save</button>
 </form>
+</div>
 {% endblock %}

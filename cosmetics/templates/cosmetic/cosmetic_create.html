@@ -2,8 +2,9 @@
 
 <script src="{% static 'cosmetics/scripts/addCosmetics.js' %}" defer></script>
 {% endblock %} {% block content %}
+<div class="content">
 <form>
-  <div class = cosmetic>
+  <div class = "cosmetic">
     <select>
       <option selected disabled hidden>Choose cosmetic type</option>
       <option value="body">Body</option>
@@ -26,4 +27,5 @@
 
     <input class="awesomplete"
        data-list="Ada, Java, JavaScript, Brainfuck, LOLCODE, Node.js, Ruby on Rails" />
+</div>
 {% endblock %}

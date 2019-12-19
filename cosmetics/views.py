@@ -49,19 +49,12 @@ class AddNewCosmetic(View):
 
     @method_decorator(validate_cosmetic_json)
     def post(self, request, requested_cosmetics):
-        typ = requested_cosmetics['commonCosmeticData'].pop('type')
-        ingredients = requested_cosmetics['commonCosmeticData'].pop(
+        typ = requested_cosmetics.pop('type')
+        ingredients = requested_cosmetics.pop(
             'ingredients'
         )
-        name = requested_cosmetics['commonCosmeticData'].pop('name')
-        target_gender = requested_cosmetics['commonCosmeticData'].pop(
-            'target_gender'
-        )
-        description = requested_cosmetics['commonCosmeticData'].pop(
-            'description'
-        )
         properties = requested_cosmetics.pop('properties')
-        requested_cosmetics.pop('commonCosmeticData')
+        
 
         properties_objects = []
         for propertyName in properties:
@@ -74,40 +67,15 @@ class AddNewCosmetic(View):
         print(properties_objects)
 
         if typ == "body":
-            cosmetic = BodyCosmetic(
-                name=name,
-                target_gender=target_gender,
-                cosmetic_type=typ,
-                **requested_cosmetics
-            )
+            cosmetic = BodyCosmetic(**requested_cosmetics)
         elif typ == "hands":
-            cosmetic = HandsCosmetic(
-                name=name,
-                target_gender=target_gender,
-                cosmetic_type=typ,
-                **requested_cosmetics
-            )
+            cosmetic = HandsCosmetic(**requested_cosmetics)
         elif typ == "feet":
-            cosmetic = FeetCosmetic(
-                name=name,
-                target_gender=target_gender,
-                cosmetic_type=typ,
-                **requested_cosmetics
-            )
+            cosmetic = FeetCosmetic(**requested_cosmetics)
         elif typ == "hair":
-            cosmetic = HairCosmetic(
-                name=name,
-                target_gender=target_gender,
-                cosmetic_type=typ,
-                **requested_cosmetics
-            )
+            cosmetic = HairCosmetic(**requested_cosmetics)
         elif typ == "face":
-            cosmetic = FaceCosmetic(
-                name=name,
-                target_gender=target_gender,
-                cosmetic_type=typ,
-                **requested_cosmetics
-            )
+            cosmetic = FaceCosmetic(**requested_cosmetics)
         else:
             return JsonResponse({'message': ':('})
         cosmetic.save()

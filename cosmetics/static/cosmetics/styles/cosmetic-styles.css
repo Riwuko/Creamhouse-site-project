@@ -1,7 +1,32 @@
-body {
-  color: powderblue;
 
+body {
+  color: white;
+  margin: 0px;
+  font-family: "Lato", sans-serif;
 }
+
+html { 
+  background: url(/static/images/main-image.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+div.content {
+  margin-left: 220px;
+  padding: 15px 15px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  margin-top: 8px;
+}
+
 .ingredients-filters {
  	margin-right: 80px;
 }
@@ -31,5 +56,65 @@ select {
     width: 160px;
 }
 
+a {
+	color: #d28831;
+}
+
+.sidebar-icons {
+	margin-top: 60px;
+}
+
+.stripe-sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  position: fixed;
+  height: 100%;
+
+}
+
+.full_sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #88af80;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.full_sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.smaller_sidebar {
+	visibility: hidden;
+	margin: 0;
+    padding: 5px;
+    height: 50px;
+ 	width: 100%;
+  	background-color: #88af80;
+  	position: fixed;
+  	overflow: auto;
+}
+.smaller_sidebar a{
+	color: #ffffff;
+}
 
 
+@media screen and (max-width: 700px) {
+  .full_sidebar {visibility: hidden;}
+  .sidebar-icons{visibility: hidden;}
+  .stripe-sidebar{visibility: hidden;}
+  .full_sidebar a {visibility:hidden;}
+  .smaller_sidebar{visibility:visible; }
+  div.content {margin-left: 10px;}
+}
+
+@media screen and (max-width: 400px) {
+  .full_sidebar {visibility: hidden;}
+  .full_sidebar a {visability:hidden;}
+  div.content {margin: 1px;}
+}

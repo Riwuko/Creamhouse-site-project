@@ -44,7 +44,6 @@ ingredients_filters_schema = {
 };
 
 basic_cosmetic_schema = {
-    'properties':{
         'type':{
             'type':'string',
             'enum':['hair','body','face','hands','feet'],
@@ -58,21 +57,14 @@ basic_cosmetic_schema = {
             'minLength': 3, 
             'maxLength': 6
             },
-        'description': {'type': 'string'},
+        'description': {'type': 'string', 'maxLength':1000},
         'ingredients': {
             'type': 'array',
             'items': {'type': 'string',  'maxLength': 50},
         },
-        },
-        "required":[
-            "name",
-            "type",
-            "target_gender",
-        ]
 }
 
 cosmetics_basic_filters_schema = {
-    'properties': {
          'type':{
             'type':'string',
             'enum':['hair','body','face','hands','feet'],
@@ -85,11 +77,6 @@ cosmetics_basic_filters_schema = {
             'minLength': 3, 
             'maxLength': 6
             },
-    },
-    "required": [
-        "type",
-        "target_gender",
-    ],
 }
 
 def hands_feet_cosmetic_schema(withFilters=False):
@@ -121,7 +108,7 @@ def hands_feet_cosmetic_schema(withFilters=False):
         "skin_type",
         "properties",
         "type",
-        "targer_gender"
+        "target_gender"
     ],
     }
     return hands_feet_cosmetic_schema
@@ -149,12 +136,13 @@ def body_cosmetic_schema(withFilters=False):
             },
             
         },
-        'commonCosmeticData': {'type': 'object', **param}
+        **param
     },
     "required": [
         "skin_type",
         "properties",
-        "commonCosmeticData",
+        "type",
+        "target_gender"
     ],
 }
     return body_cosmetic_schema
@@ -187,14 +175,15 @@ def hair_cosmetic_schema(withFilters=False):
                 'minLength': 3, 
                 'maxLength': 50},
         },
-        'commonCosmeticData': {'type': 'object', **param}
+        **param
 
     },
     "required": [
         "hair_type",
         "hair_problem",
         'properties',
-        "commonCosmeticData",
+        "type",
+        "target_gender"
     ],
 }
     return hair_cosmetic_schema
@@ -220,7 +209,7 @@ def face_cosmetic_schema(withFilters=False):
             'maxLength': 50
             },
         'time_of_day': {'type:': 'string', 'minLength': 3, 'maxLength': 10},
-        'commonCosmeticData': {'type': 'object', **basic_cosmetic_schema},
+        **basic_cosmetic_schema,
          'properties': {
             'type': 'array',
             'items': {
@@ -236,7 +225,8 @@ def face_cosmetic_schema(withFilters=False):
         "skin_subtype",
         "time_of_day",
         "properties",
-        "commonCosmeticData",
+        "type",
+        "target_gender"
     ],
 }
 

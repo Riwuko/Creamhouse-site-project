@@ -1,11 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block scripts %}
 <script src="{% static 'cosmetics/scripts/cosmeticsList.js' %}" defer></script>
 {% endblock %} {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="content">
 <form>
 	<div class="cosmetics">
 		<div class="cosmetics-filters">
@@ -51,6 +47,6 @@
     <li>No {{ object_type }} yet.</li>
 {% endfor %}
 </ul>
-</body>
 
+</div>
 {% endblock %}

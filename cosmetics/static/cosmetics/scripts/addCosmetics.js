@@ -298,7 +298,7 @@ const getCosmeticData = () => {
 
   const bodyCosmeticData = () => {
     return (bodyHandsFeetCosmeticJson = {
-      commonCosmeticData,
+      ...commonCosmeticData,
       skin_type: cosmetic.querySelector('div.single-cosmetic-skin-type select')
         .value,
       properties: cosmeticProperties,
@@ -307,7 +307,7 @@ const getCosmeticData = () => {
 
   const handsFeetCosmeticData = () => {
     return (handsFeetCosmeticJson = {
-      commonCosmeticData,
+      ...commonCosmeticData,
       skin_type: cosmetic.querySelector(
         'div.single-cosmetic-skin-type input:checked',
       ).id,
@@ -317,7 +317,7 @@ const getCosmeticData = () => {
 
   const faceCosmeticData = () => {
     return (faceCosmeticJson = {
-      commonCosmeticData,
+      ...commonCosmeticData,
       skin_type: cosmetic.querySelector(
         'div.single-cosmetic-skin-type input:checked',
       ).id,
@@ -333,7 +333,7 @@ const getCosmeticData = () => {
 
   const hairCosmeticData = () => {
     return (hairCosmeticJson = {
-      commonCosmeticData,
+      ...commonCosmeticData,
       hair_type: cosmetic.querySelector(
         'div.single-cosmetic-hair-type input:checked',
       ).id,

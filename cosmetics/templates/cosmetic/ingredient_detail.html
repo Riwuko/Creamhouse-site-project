@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+	
 {% for name in ingredient_names %}
     <div>Ingredient name : {{ name }}</div>
 {% endfor %}
@@ -13,6 +10,8 @@
 <div>Natural: {{ object.natural }}</div>
 <div>Hypoallergenic: {{ object.hypoallergenic }}</div>
 <div>Verified: {{ object.verified }}</div>
-</body>
-</html>
 
+
+</div>
+
+{% endblock %}

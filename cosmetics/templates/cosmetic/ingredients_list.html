@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block scripts %}
 <script src="{% static 'cosmetics/scripts/ingredientsList.js' %}" defer></script>
 {% endblock %} {% block content %}
-<body>
+<div class="content">
 	<form>
 	  <div class = ingredients>
 	  	<div class="ingredients-filters">
@@ -55,7 +55,7 @@
 {% endfor %}
 
 </ul>
-</body>
 
 
+</div>
 {% endblock %}
