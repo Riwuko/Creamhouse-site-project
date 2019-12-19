@@ -1,11 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
+from cosmetics.json_schemas import (
+    body_cosmetic_schema,
+    face_cosmetic_schema,
+    hair_cosmetic_schema,
+    hands_feet_cosmetic_schema,
+    ingredient_schema,
+)
 from cosmetics.models import (
     Cosmetic,
     BodyCosmetic,
@@ -17,10 +23,7 @@ from cosmetics.models import (
     IngredientName,
     CosmeticProperties,
 )
-from cosmetics.validation import (
-    validate_cosmetic_json,
-    validate_ingredients_json,
-)
+from cosmetics.validation import validate_json
 
 
 @method_decorator(login_required, name='dispatch')
@@ -28,11 +31,11 @@ class AddNewIngredient(View):
     def get(self, request):
         return render(request, 'cosmetic/ingredient_create.html', {})
 
-    @method_decorator(validate_ingredients_json)
-    def post(self, request, requested_ingredients):
-        related_names = requested_ingredients.pop('related_names')
-        related_names.append(requested_ingredients.pop('main_name'))
-        ingredient = Ingredient(**requested_ingredients)
+    @method_decorator(validate_json(ingredient_schema))
+    def post(self, request, requested_json):
+        related_names = requested_json.pop('related_names')
+        related_names.append(requested_json.pop('main_name'))
+        ingredient = Ingredient(**requested_json)
         ingredient.save()
         IngredientName.objects.bulk_create(
             [
@@ -43,45 +46,53 @@ class AddNewIngredient(View):
         return JsonResponse({'message': ':)'})
 
 
-class AddNewCosmetic(View):
-    def get(self, request):
-        return render(request, 'cosmetic/cosmetic_create.html', {})
+class AddNewCosmetic(TemplateView):
+    template_name = 'cosmetic/cosmetic_create.html'
 
-    @method_decorator(validate_cosmetic_json)
-    def post(self, request, requested_cosmetics):
-        typ = requested_cosmetics.pop('type')
-        ingredients = requested_cosmetics.pop(
-            'ingredients'
-        )
-        properties = requested_cosmetics.pop('properties')
-        
 
+class AddNewCosmeticType(View):
+    model = None
+
+    def post(self, request, requested_json):
+        typ = requested_json.pop('type')
+        ingredients = requested_json.pop('ingredients')
+        properties = requested_json.pop('properties')
         properties_objects = []
-        for propertyName in properties:
+        for property_name in properties:
             obj, created = CosmeticProperties.objects.get_or_create(
-                name=propertyName
+                name=property_name
             )
             properties_objects.append(obj)
-            print(obj.name)
-
-        print(properties_objects)
-
-        if typ == "body":
-            cosmetic = BodyCosmetic(**requested_cosmetics)
-        elif typ == "hands":
-            cosmetic = HandsCosmetic(**requested_cosmetics)
-        elif typ == "feet":
-            cosmetic = FeetCosmetic(**requested_cosmetics)
-        elif typ == "hair":
-            cosmetic = HairCosmetic(**requested_cosmetics)
-        elif typ == "face":
-            cosmetic = FaceCosmetic(**requested_cosmetics)
-        else:
-            return JsonResponse({'message': ':('})
+        cosmetic = self.model(**requested_json)
         cosmetic.save()
-        for propert in properties_objects:
-            cosmetic.properties.add(propert)
+        for property in properties_objects:
+            cosmetic.properties.add(property)
         return JsonResponse({'message': ':)'})
+
+
+@method_decorator(validate_json(body_cosmetic_schema()), name='post')
+class AddNewCosmeticBody(AddNewCosmeticType):
+    model = BodyCosmetic
+
+
+@method_decorator(validate_json(hands_feet_cosmetic_schema()), name='post')
+class AddNewCosmeticHands(AddNewCosmeticType):
+    model = HandsCosmetic
+
+
+@method_decorator(validate_json(hands_feet_cosmetic_schema()), name='post')
+class AddNewCosmeticFeet(AddNewCosmeticType):
+    model = FeetCosmetic
+
+
+@method_decorator(validate_json(hair_cosmetic_schema()), name='post')
+class AddNewCosmeticHair(AddNewCosmeticType):
+    model = HairCosmetic
+
+
+@method_decorator(validate_json(face_cosmetic_schema()), name='post')
+class AddNewCosmeticFace(AddNewCosmeticType):
+    model = FaceCosmetic
 
 
 class CosmeticListView(ListView):
@@ -93,9 +104,29 @@ class CosmeticListView(ListView):
         context['object_type'] = 'cosmetics'
         return context
 
+
 class CosmeticDetailView(DetailView):
     model = Cosmetic
     template_name = 'cosmetic/cosmetics_detail.html'
+
+
+class CosmeticCheckComposition(View):
+    def get(self, request, pk):
+        ingredients = Ingredient.objects.filter(cosmetic=pk)
+        return JsonResponse(
+            {
+                'ingredients': [
+                    {
+                        'description': ingredient.description,
+                        'ingredient_type': ingredient.ingredient_type,
+                        'natural': ingredient.natural,
+                        'hypoallergenic': ingredient.hypoallergenic,
+                        'verified': ingredient.verified,
+                    }
+                    for ingredient in ingredients
+                ]
+            }
+        )
 
 
 class IngredientListView(ListView):
@@ -117,7 +148,7 @@ class IngredientDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         pk = self.object.pk
         ingredient_names = IngredientName.objects.filter(ingredient=pk).all()
-        names=[]
+        names = []
         for ingredient in ingredient_names:
             names.append(ingredient.name)
         print(names)

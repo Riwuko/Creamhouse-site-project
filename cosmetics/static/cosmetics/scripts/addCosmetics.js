@@ -354,31 +354,11 @@ const getCosmeticData = () => {
     return handsFeetCosmeticData();
   }
 };
-const requestGet = async (url, querystring) => {
-  const response = await fetch(`${url}?${querystring}`, {
-    method: 'GET',
-    credentials: 'include',
-  });
-  return response.json();
-};
-
-const requestPost = async (url, jsonData) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': Cookies.get('csrftoken'),
-    },
-    body: JSON.stringify(jsonData),
-    credentials: 'include',
-  });
-  return response.json();
-};
 
 const addCosmetic = async () => {
   const jsonData = getCosmeticData();
   console.log(jsonData);
-  resp = await requestPost('/cosmetic/add', jsonData);
+  resp = await requestPost(`/cosmetic/add/${jsonData['type']}`, jsonData);
   console.log(resp);
   // window.location.replace('/')
 };

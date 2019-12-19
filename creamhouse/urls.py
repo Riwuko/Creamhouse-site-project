@@ -19,7 +19,13 @@ from django.urls import path
 
 from cosmetics.views import (
     AddNewCosmetic,
+    AddNewCosmeticBody,
+    AddNewCosmeticFace,
+    AddNewCosmeticFeet,
+    AddNewCosmeticHair,
+    AddNewCosmeticHands,
     AddNewIngredient,
+    CosmeticCheckComposition,
     CosmeticDetailView,
     CosmeticListView,
     IngredientDetailView,
@@ -30,11 +36,32 @@ from cosmetics.views_api import CheckIngredient, FilterCosmetic
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ingredient/add', AddNewIngredient.as_view(),
-        name='ingredient_add',
+    path('ingredient/add', AddNewIngredient.as_view(), name='ingredient_add'),
+    path('cosmetic/add', AddNewCosmetic.as_view(), name='cosmetic_add'),
+    path(
+        'cosmetic/add/body',
+        AddNewCosmeticBody.as_view(),
+        name='cosmetic_add_body',
     ),
-    path('cosmetic/add', AddNewCosmetic.as_view(),
-        name='cosmetic_add',
+    path(
+        'cosmetic/add/face',
+        AddNewCosmeticFace.as_view(),
+        name='cosmetic_add_face',
+    ),
+    path(
+        'cosmetic/add/feet',
+        AddNewCosmeticFeet.as_view(),
+        name='cosmetic_add_feet',
+    ),
+    path(
+        'cosmetic/add/hands',
+        AddNewCosmeticHands.as_view(),
+        name='cosmetic_add_hands',
+    ),
+    path(
+        'cosmetic/add/hair',
+        AddNewCosmeticHair.as_view(),
+        name='cosmetic_add_hair',
     ),
     path(
         'accounts/login/',
@@ -51,18 +78,18 @@ urlpatterns = [
         auth_views.PasswordResetDoneView.as_view(),
         name='password_reset_done',
     ),
-    path('ingredient/check/name', CheckIngredient.as_view(), 
+    path(
+        'ingredient/check/name',
+        CheckIngredient.as_view(),
         name='ingredient_check_name',
     ),
-    path('cosmetic', CosmeticListView.as_view(),
-        name='cosmetic',
+    path('cosmetic', CosmeticListView.as_view(), name='cosmetic'),
+    path('cosmetic/show/<int:pk>', CosmeticDetailView.as_view()),
+    path(
+        'api/cosmetic/<int:pk>/check-composition',
+        CosmeticCheckComposition.as_view(),
     ),
-    path('cosmetic/show/<pk>', CosmeticDetailView.as_view()),
-    path('cosmetic/filter', FilterCosmetic.as_view(),
-        name='cosmetic_filter',
-    ),
-    path('ingredient', IngredientListView.as_view(),
-        name='ingredient',
-    ),
-    path('ingredient/show/<pk>', IngredientDetailView.as_view()),
+    path('cosmetic/filter', FilterCosmetic.as_view(), name='cosmetic_filter'),
+    path('ingredient', IngredientListView.as_view(), name='ingredient'),
+    path('ingredient/show/<int:pk>', IngredientDetailView.as_view()),
 ]
