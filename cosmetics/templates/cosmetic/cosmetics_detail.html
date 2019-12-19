@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+
 <div>Name: {{ object.name }}</div>
 <div>Tager gender: {{ object.target_gender }}</div>
 <div>Description: {{ object.description }}</div>
@@ -28,6 +25,7 @@
     <div>Hair_problem: {{ object.haircosmetic.hair_problem }}</div>
     <div>Properties: {{ object.haircosmetic.properties }}</div>
 {% endif %}
-</body>
-</html>
 
+</div>
+
+{% endblock %}

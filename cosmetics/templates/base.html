@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Creamhouse</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'cosmetics/styles/cosmetic-styles.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
     <script src="https://cdnjs.com/libraries/awesomplete"></script>
@@ -10,8 +11,32 @@
     {% endblock %}
 </head>
 <body>
+	<div class='stripe-sidebar'>
+	</div>
+	<div class="full_sidebar">
+		<div class="logo-site">
+			<img src="/static/images/buttons/logo.png" style="width:80%">
+		</div>
+		<div class="sidebar-icons">
+	  <img src="/static/images/buttons/home.png" alt="Home" title="Home" style="width:35%">
+	  <a href="{%url 'cosmetic_add' %}"><img src="/static/images/buttons/cosmetic_add.png" alt="Add cosmetic" title="Add cosmetic" style="width:40%"></a>
+	  <a href="{%url 'ingredient_add' %}"><img src="/static/images/buttons/ingredient_add.png" alt="Add ingredient" title="Add ingredient" style="width:40%"></a>
+	  <a href="{%url 'cosmetic' %}"><img src="/static/images/buttons/cosmetics.png" alt="Cosmetics list" title="Cosmetics list" style="width:40%"></a>
+	  <a href="{%url 'ingredient' %}"><img src="/static/images/buttons/ingredients.png" alt="Ingredients list" title="Ingredients list" style="width:40%"></a>
+	</div>
+	</div>
+
+	<div class="smaller_sidebar">
+	  <a href="{%url 'cosmetic_add' %}">Add cosmetic</a>
+	  <a href="{%url 'ingredient_add' %}">Add ingredient</a>
+	  <a href="{%url 'cosmetic' %}">Cosmetics list</a>
+	  <a href="{%url 'ingredient' %}">Ingredients list</a>
+	</div>
+
+
 	{% block content %}
 		replace this
 	{% endblock %}
+
 	</body>
 </html>

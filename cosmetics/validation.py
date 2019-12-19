@@ -31,9 +31,11 @@ def validate_cosmetic_json(func):
     def wrapper(request, *args, **kwargs):
         try:
             requested_cosmetics= json.loads(request.body)
-            typ = requested_cosmetics['commonCosmeticData']['type' ]
-            
-            print(typ)
+            typ = requested_cosmetics['type']
+            from pprint import pprint
+            print('requested_cosmetics')
+            pprint(requested_cosmetics)
+
             if (typ=="body"):
                 body_schema = body_cosmetic_schema()
                 jsonschema.validate(requested_cosmetics,body_schema)
@@ -42,6 +44,8 @@ def validate_cosmetic_json(func):
                 jsonschema.validate(requested_cosmetics,hands_feet_schema)
             elif typ=="hair":
                 hair_schema = hair_cosmetic_schema()
+                print('hair_schema')
+                pprint(hair_schema)
                 jsonschema.validate(requested_cosmetics,hair_schema)
             elif typ=="face":
                 face_schema = face_cosmetic_schema()
