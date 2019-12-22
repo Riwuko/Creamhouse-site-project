@@ -28,8 +28,11 @@ from cosmetics.views import (
     CosmeticCheckComposition,
     CosmeticDetailView,
     CosmeticListView,
+    homeView,
     IngredientDetailView,
     IngredientListView,
+    logout_view,
+    signup,
 )
 from cosmetics.views_api import CheckIngredient, FilterCosmetic
 
@@ -69,6 +72,16 @@ urlpatterns = [
         name='login',
     ),
     path(
+        'accounts/signup/',
+        signup,
+        name='signup',
+    ),
+    path(
+        'accounts/logout/',
+        logout_view,
+        name='logout',
+    ),
+    path(
         'accounts/password-reset',
         auth_views.PasswordResetView.as_view(),
         name='password_reset',
@@ -77,6 +90,11 @@ urlpatterns = [
         'accounts/password-done',
         auth_views.PasswordResetDoneView.as_view(),
         name='password_reset_done',
+    ),
+    path(
+        'home',
+        homeView,
+        name='home',
     ),
     path(
         'ingredient/check/name',

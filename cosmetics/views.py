@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
+
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import UserCreationForm
 
 from cosmetics.json_schemas import (
     body_cosmetic_schema,
@@ -26,7 +29,29 @@ from cosmetics.models import (
 from cosmetics.validation import validate_json
 
 
-@method_decorator(login_required, name='dispatch')
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'cosmetic/signup.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+def homeView(request):
+    return render(request, 'cosmetic/home.html',{})
+
+# @method_decorator(login_required, name='dispatch')
 class AddNewIngredient(View):
     def get(self, request):
         return render(request, 'cosmetic/ingredient_create.html', {})
@@ -63,10 +88,17 @@ class AddNewCosmeticType(View):
                 name=property_name
             )
             properties_objects.append(obj)
+        ingredients_objects = []
+        for ingredient in ingredients:
+            ingredient_name_object=IngredientName.objects.get(name=ingredient)
+            ingredients_objects.append(Ingredient.objects.get(pk=ingredient_name_object.pk))
+        
         cosmetic = self.model(**requested_json)
         cosmetic.save()
         for property in properties_objects:
             cosmetic.properties.add(property)
+        for ingredient in ingredients_objects:
+            ingredient.cosmetic.add(cosmetic)
         return JsonResponse({'message': ':)'})
 
 
@@ -113,21 +145,28 @@ class CosmeticDetailView(DetailView):
 class CosmeticCheckComposition(View):
     def get(self, request, pk):
         ingredients = Ingredient.objects.filter(cosmetic=pk)
+        ingredients_names=[]
+        for ingredient in ingredients:
+            ingredient_names = IngredientName.objects.filter(ingredient=ingredient.pk)
+            names = []
+            for ingredient in ingredient_names:
+                names.append(ingredient.name)
+            ingredients_names.append(names)
         return JsonResponse(
             {
                 'ingredients': [
                     {
+                        'ingredient_names':ingredients_names[i],
                         'description': ingredient.description,
                         'ingredient_type': ingredient.ingredient_type,
                         'natural': ingredient.natural,
                         'hypoallergenic': ingredient.hypoallergenic,
                         'verified': ingredient.verified,
                     }
-                    for ingredient in ingredients
+                    for i,ingredient in enumerate(ingredients)
                 ]
             }
         )
-
 
 class IngredientListView(ListView):
     model = IngredientName
