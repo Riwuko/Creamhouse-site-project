@@ -79,7 +79,6 @@ class AddNewCosmeticType(View):
     model = None
 
     def post(self, request, requested_json):
-        typ = requested_json.pop('type')
         ingredients = requested_json.pop('ingredients')
         properties = requested_json.pop('properties')
         properties_objects = []

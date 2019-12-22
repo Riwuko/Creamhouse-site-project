@@ -41,10 +41,10 @@ ingredients_filters_schema = {
         "natural",
         "hypoallergenic",
     ],
-};
+}
 
 basic_cosmetic_schema = {
-        'type':{
+        'cosmetic_type':{
             'type':'string',
             'enum':['hair','body','face','hands','feet'],
             'minLength':3,
@@ -65,7 +65,7 @@ basic_cosmetic_schema = {
 }
 
 cosmetics_basic_filters_schema = {
-         'type':{
+         'cosmetic_type':{
             'type':'string',
             'enum':['hair','body','face','hands','feet'],
             'minLength':3,
@@ -107,7 +107,7 @@ def hands_feet_cosmetic_schema(withFilters=False):
     "required": [
         "skin_type",
         "properties",
-        "type",
+        "cosmetic_type",
         "target_gender"
     ],
     }
@@ -141,7 +141,7 @@ def body_cosmetic_schema(withFilters=False):
     "required": [
         "skin_type",
         "properties",
-        "type",
+        "cosmetic_type",
         "target_gender"
     ],
 }
@@ -182,7 +182,7 @@ def hair_cosmetic_schema(withFilters=False):
         "hair_type",
         "hair_problem",
         'properties',
-        "type",
+        "cosmetic_type",
         "target_gender"
     ],
 }
@@ -225,7 +225,7 @@ def face_cosmetic_schema(withFilters=False):
         "skin_subtype",
         "time_of_day",
         "properties",
-        "type",
+        "cosmetic_type",
         "target_gender"
     ],
 }

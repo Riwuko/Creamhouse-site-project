@@ -336,7 +336,7 @@ const getCosmeticData = () => {
   }
 
   const commonCosmeticData = {
-    type: cosmeticType,
+    cosmetic_type: cosmeticType,
     name: cosmetic.querySelector('div.single-cosmetic-name input').value,
     description: cosmetic.querySelector(
       'div.single-cosmetic-description textarea',
@@ -435,7 +435,7 @@ const addCosmetic = async () => {
   if(initialValidate){
   const jsonData = getCosmeticData();
   console.log(jsonData);
-  resp = await requestPost(`/cosmetic/add/${jsonData['type']}`, jsonData);
+  resp = await requestPost(`/cosmetic/add/${jsonData['cosmetic_type']}`, jsonData);
   console.log(resp);
   // window.location.replace('/')
 }
