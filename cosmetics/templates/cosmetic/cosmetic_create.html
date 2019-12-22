@@ -4,7 +4,9 @@
 {% endblock %} {% block content %}
 <div class="content">
 <form>
+
   <div class = "cosmetic">
+    <div class="form-item">
     <select>
       <option selected disabled hidden>Choose cosmetic type</option>
       <option value="body">Body</option>
@@ -13,19 +15,22 @@
       <option value="face">Face</option>
       <option value="feet">Feet</option>
     </select>
+  </div>
 
     <div class="single-cosmetic">
     </div>
   </div>
+  <div class="button-alike">
   <input
     class="add-next-ingredient"
     type="button"
     value="Add next ingredient"
   />
-  <button type="button">Save</button>
+</div>
+<div class="button-alike">
+  <button class="save-form" type="button">Save</button>
+</div>
 </form>
 
-    <input class="awesomplete"
-       data-list="Ada, Java, JavaScript, Brainfuck, LOLCODE, Node.js, Ruby on Rails" />
 </div>
 {% endblock %}

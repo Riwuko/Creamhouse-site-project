@@ -5,13 +5,12 @@
 <form>
 	<div class="cosmetics">
 		<div class="cosmetics-filters">
-			<div>
-	      		<span class="cosmetics-filters"><label class=filters-label>Cosmetics types:</label></span>
+			<div class="flex-container">
+	      		<div class="cosmetics-filters-flex-item"><label class=filters-label>Cosmetics types:</label></div>
 
-	      		<span class="cosmetics-filters"><label class=filters-label>Target gender:</label></span>
-	  		</div>
-	  		<div>
-	  			<span class="cosmetics-filters">
+	      		<div class="cosmetics-filters-flex-item"><label class=filters-label>Target gender:</label></div>
+	  		
+	  			<div class="cosmetics-filters-flex-item">
 	  			<select class="cosmetics-filters-types">
 			      <option selected value="all">All</option>
 			      <option value="body">Body</option>
@@ -19,15 +18,15 @@
 			      <option value="hands">Hands</option>
 			      <option value="face">Face</option>
 			      <option value="feet">Feet</option>
-			    </select> </span>
+			    </select> </div>
 
-			    <span class="cosmetics-filters">
+			    <div class="flex-item">
 			    <select class="cosmetics-filters-target-gender">
 			      <option selected value="all">All</option>
 			      <option value="both">Both</option>
 			      <option value="male">Male</option>
 			      <option value="female">Female</option>
-			    </select></span>
+			    </select></div>
 
 	  		</div>
 

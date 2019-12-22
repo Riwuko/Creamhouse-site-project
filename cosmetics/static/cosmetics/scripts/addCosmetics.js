@@ -1,6 +1,13 @@
+var showIngredientButton = document.querySelector('input.add-next-ingredient');
+var showSaveButton = document.querySelector('button.save-form');
+showIngredientButton.style.display="none";
+showSaveButton.style.display="none";
+
 const chooseCosmeticType = document.querySelector('form select');
 const formSpace = document.querySelector('form div.single-cosmetic');
 const changeFormTemplate = () => {
+  showIngredientButton.style.display = "block";
+  showSaveButton.style.display = "block";
   const cosmeticType = chooseCosmeticType.value;
   formSpace.innerHTML = mainCosmeticForm;
   formSpace.innerHTML += partialCosmeticForm[cosmeticType];
@@ -11,11 +18,17 @@ const changeFormTemplate = () => {
 chooseCosmeticType.addEventListener('change', changeFormTemplate);
 
 const mainCosmeticForm = `
+  <div class="form-container">
     <div class="single-cosmetic-name">
+        <div class="form-item">
       <label>Cosmetic Name: </label>
+      <div class="alert"> <div class="cosmetic-name-alert"></div></div>
       <input type="text" name="cosmetic-name" />
     </div>
+    </div>
+
     <div class="single-cosmetic-target-gender">
+      <div class="form-item">
       <label>Target gender:</label>
         <div>
           <input type="radio" id="both" name="gender" checked>
@@ -25,17 +38,22 @@ const mainCosmeticForm = `
           <input type="radio" id="male" name="gender">
           <label for="male">Male</label>
         </div>
+    </div>
+  </div>
 `;
 
 const cosmeticDescription = `
     <div class="single-cosmetic-description">
+    <div class="form-item-area">
       <label>Description: </label>
-      <textarea></textarea>
+      <textarea rows=10></textarea>
+      </div>
     </div>
 `;
 
 const bodyCosmeticForm = `
     <div class="single-cosmetic-skin-type">
+    <div class="form-item">
       <label>Cosmetic Skin Type:</label>
         <select class="single-cosmetic-skin-type">
         <option value="dehyderated" id="dehyderated">Dehyderated skin</option>
@@ -46,8 +64,10 @@ const bodyCosmeticForm = `
         <option value="sensitive" id="sensitive">Sensitive skin</option>
       </select>
     </div>
+    </div>
 
     <div class="single-cosmetic-properties">
+    <div class="form-item">
       <legend>Choose cosmetic properties:</legend>
         <div>
           <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing">
@@ -69,10 +89,26 @@ const bodyCosmeticForm = `
           <input class="property" type="checkbox" id="sunscreen" name="property" value="sunscreen">
           <label for="sunscreen">Sunscreen</label>
         </div>
+        </div>
     </div>
 `;
 const faceCosmeticForm = `
+  <div class="form-container">
+      <div class="single-cosmetic-time-of-day">
+    <div class="form-item">
+      <label>Time of day:</label>
+        <div>
+          <input type="radio" id="both" name="time-day">
+          <label for="both">Both</label>
+          <input type="radio" id="day" name="time-day">
+          <label for="day">Day</label>
+          <input type="radio" id="night" name="time-day">
+          <label for="night">Night</label>
+        </div>
+      </div>
+    </div>
     <div class="single-cosmetic-skin-type">  
+    <div class="form-item-wide">
       <label>Cosmetic Skin Type: </label>
           <div>
             <input type="radio" id="dry" name="skin-type">
@@ -84,39 +120,19 @@ const faceCosmeticForm = `
             <input type="radio" id="combination" name="skin-type">
             <label for="combination">Combination</label>
           </div>
-    </div>
-
-    <div class = "single-cosmetic-skin-subtype">
-    <label>Cosmetic Skin Subtype: </label>
-      <select class="single-cosmetic-skin-subtype">
-        <option value="capillaries">Capillaries skin</option>
-        <option value="sensitive">Sensitive skin</option>
-        <option value="acne">Acne skin</option>
-        <option value="contaminated">Contaminated skin</option>
-        <option value="allergic">Allergic skin</option>
-        <option value="dehyderated">Dehyderated skin</option>
-        <option value="mature">Mature skin</option>
-      </select>
-    </div>
-
-    <div class="single-cosmetic-time-of-day">
-      <label>Time of day:</label>
-        <div>
-          <input type="radio" id="both" name="time-day">
-          <label for="both">Both</label>
-          <input type="radio" id="day" name="time-day">
-          <label for="day">Day</label>
-          <input type="radio" id="night" name="time-day">
-          <label for="night">Night</label>
         </div>
     </div>
+    </div>
 
+    <div class="form-container">
     <div class = single-cosmetic-properties>
+    <div class="form-item">
       <legend>Choose cosmetic properties:</legend>
         <div>
           <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing"
           <label for="moisturiing">Moisturizing</label>
         </div>
+        <div>
           <input class="property" type="checkbox" id="reviviscent" name="property" value="reviviscent">
           <label for="reviviscent">Reviviscent</label>
         </div>
@@ -133,10 +149,28 @@ const faceCosmeticForm = `
           <label for="sunscreen">Sunscreen</label>
         </div> 
     </div>
+    </div>
+      <div class = "single-cosmetic-skin-subtype">
+    <div class="form-item">
+    <label>Cosmetic Skin Subtype: </label>
+      <select class="single-cosmetic-skin-subtype">
+        <option value="capillaries">Capillaries skin</option>
+        <option value="sensitive">Sensitive skin</option>
+        <option value="acne">Acne skin</option>
+        <option value="contaminated">Contaminated skin</option>
+        <option value="allergic">Allergic skin</option>
+        <option value="dehyderated">Dehyderated skin</option>
+        <option value="mature">Mature skin</option>
+      </select>
+    </div>
+    </div>
+    </div>
 `;
 const hairCosmeticForm = `
+  <div class="form-container">
     <div class="single-cosmetic-hair-type">
-      <label>Cosmetic hair Type:</label>
+      <div class="form-item">
+      <label>Cosmetic hair type:</label>
         <div>
           <input type="radio" id="high-porosity" name="hair-type">
           <label for="high-porosity">High porosity</label>
@@ -154,8 +188,10 @@ const hairCosmeticForm = `
           <label for="all-porosity">All porosity</label>
         </div>
     </div>
+    </div>
 
     <div class="single-cosmetic-hair-problem">
+        <div class="form-item">
       <label>Cosmetic hair problem:</label> 
         <select class="single-cosmetic-hair-problem">
           <option value="weak">Weak hair</option>
@@ -164,9 +200,13 @@ const hairCosmeticForm = `
           <option value="oily">Oily hair</option>
           <option value="all-hair">All hair</option>
         </select>
+        </div>
+    </div>
+
     </div>
 
     <div class="single-cosmetic-properties">
+      <div class="form-item-wide">
       <legend>Choose cosmetic properties:</legend>
       <div>
         <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
@@ -194,11 +234,13 @@ const hairCosmeticForm = `
       <input class="property" type="checkbox" id="against-greasiness" name="property" value="against-greasiness"
       <label for="against-greasiness">Against greasiness</label>
     </div>
+    </div>
   </div>
 `;
 
 const handsFeetCosmeticForm = `
-    <div class="single-cosmetic-skin-type">  
+    <div class="single-cosmetic-skin-type"> 
+    <div class="form-item-wide"> 
       <label>Cosmetic Skin Type:</label>
           <div>
             <input type="radio" id="dry" name="skin-type">
@@ -210,9 +252,11 @@ const handsFeetCosmeticForm = `
             <input type="radio" id="inelastic" name="skin-type">
             <label for="inelastic">Inelastic</label>
           </div>
+          </div>
     </div>
 
     <div class="single-cosmetic-properties" name="single-cosmetic-propeties">
+    <div class="form-item">
       <legend>Choose cosmetic properties:</legend>
         <div>
           <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
@@ -226,6 +270,7 @@ const handsFeetCosmeticForm = `
           <input class="property" type="checkbox" id="sunscreen" name="property" value="sunscreen">
           <label for="sunscreen">Sunscreen</label>
         </div>
+        </div>
     </div>
  `;
 
@@ -238,19 +283,25 @@ const partialCosmeticForm = {
 };
 
 const changeSuggestions = async ingredientId => {
-  const inputElement = document.querySelector(`div#${ingredientId} input`)
+  var inputElement = document.querySelector(`div#${ingredientId} input`)
   const inputValue = inputElement.value;
   const { ingredients } = await requestGet('/ingredient/check/name', `ingredient=${inputValue}`);
-  // inputElement.setAttribute('data-list', ingredients);
+  var awesomplete = new Awesomplete(inputElement,{minChars: 1});
+  inputElement.setAttribute('data-list', ingredients);
+  awesomplete.evaluate();
 };
 
 window.ingredientId = 1;
 const addNextIngredient = ingredientElement => {
   const newIngredient = `
         <div class="new-ingredient">
-        <label for="name">Add ingredient:</label>
-        <input type="text" name="ingredient-name">
+        <div class="form-item-font-black">
+        <span class="extra-white-element"><label for="name">Add ingredient:</label></span>
+        <input type="text" name="ingredient-name>
+               </div>
+        <script type="text/javascript" src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
         <ul></ul>
+
         </div>`;
   const div = document.createElement('div');
   div.classList.add('next-cosmetic-ingredient');
@@ -355,12 +406,39 @@ const getCosmeticData = () => {
   }
 };
 
+
+const checkCompability= (name,element,regex,alert) => {
+  const correct=regex.test(element);
+  const stringPath = 'form div.cosmetic-'.concat(name).concat('-alert'); 
+  const formSpace = document.querySelector(stringPath);
+  if(!correct){
+    formSpace.innerHTML = alert;
+    return false;
+  }
+  formSpace.innerHTML = "";
+  return true;
+};
+
+const initialValidate = () => {
+  var correct=true;
+  const jsonData = getCosmeticData();
+  const name =  jsonData['name'];
+  var regex = /.{3,50}/;
+  if(!checkCompability("name",name,regex,"Enter correct name (between 3 and 50 characters)")){
+    correct = false;
+  }
+
+  return correct;
+};
+
 const addCosmetic = async () => {
+  if(initialValidate){
   const jsonData = getCosmeticData();
   console.log(jsonData);
   resp = await requestPost(`/cosmetic/add/${jsonData['type']}`, jsonData);
   console.log(resp);
   // window.location.replace('/')
+}
 };
 
 document.querySelector('form button').addEventListener('click', addCosmetic);
