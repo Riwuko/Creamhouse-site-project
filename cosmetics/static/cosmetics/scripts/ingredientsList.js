@@ -27,18 +27,6 @@ const getIngredientsFiltersData = () => {
   	}
 };
 
-const requestPost = async (url, jsonData) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': Cookies.get('csrftoken'),
-    },
-    body: JSON.stringify(jsonData),
-    credentials: 'include',
-  });
-  return response.json();
-};
 
 
 

@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="content">
-	
+<h1>Ingredient {{ingredient_names.0}} </h1>
+<div class="form-item">Verified: {{ object.verified }}</div>
+<table class="form-item-table">
+<tr>
+<th>Names</th>
+<th>
 {% for name in ingredient_names %}
-    <div>Ingredient name : {{ name }}</div>
+    {{ name }}
 {% endfor %}
+</th>
+</tr>
+<tr>
+<th>Ingredient type </th>
+<th> {{ object.ingredient_type }}</th>
+</tr>
+<tr>
+<th>Natural</th>
+<th> {{ object.natural }}</th>
+</tr>
+<tr>
+<th>Hypoallergenic </th>
+<th>{{ object.hypoallergenic }}</th>
+</tr>
+</table>
 
-<div>Ingredient type: {{ object.ingredient_type }}</div>
-<div>Natural: {{ object.natural }}</div>
-<div>Hypoallergenic: {{ object.hypoallergenic }}</div>
-<div>Verified: {{ object.verified }}</div>
-
-
+<div class="form-item-wide">Description: {{object.description}}</div>
 </div>
-
 {% endblock %}
