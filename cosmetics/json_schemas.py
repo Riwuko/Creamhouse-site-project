@@ -1,6 +1,6 @@
 ingredient_schema = {
     'properties': {
-        'main_name': {'type': 'string', 'minLength': 3, 'maxLength': 50},
+        'main_name':{'type':'string','minLength':3,'maxLength':50},
         'description': {'type': 'string', 'minLength': 10},
         'ingredient_type': {
             'type': 'string', 

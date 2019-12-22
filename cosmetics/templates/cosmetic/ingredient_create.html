@@ -6,15 +6,21 @@
 <form>
   <div class="single-ingredient">
     <div class="single-ingredient-name">
+      <div class="form-item">
       <label>Ingredient Name:</label>
-      <input type="text" name="ingredient-name" />
+      <div class="alert"> <div class="ingredient-name-alert"></div></div>
+      <input type="text" name="single-ingredient-name"/>
     </div>
-    <div class="single-ingredient-description">
-      <label>Ingredient Description:</label>
-      <textarea></textarea>
-    </div>
+  </div>
+  <div class="button-alike">
+    <input class="add-related-name" type="button" value="Add related name" />
+  </div>
+  <div class="single-ingredient-related-names">
+  </div>
     <div class="single-ingredient-type">
+      <div class="form-item">
       <label>Ingredient type:</label>
+      <div class="alert"> <div class="ingredient-type-alert"></div></div>
        <select>
         <option value="preservative">Preservative</option>
         <option value="emolient">Emolient</option>
@@ -33,17 +39,31 @@
         <option value="cleansing">Cleansing</option>
       </select>
     </div>
+    </div>
     <div class="single-ingredient-natural">
+      <div class="form-item-beside">
       <label>Is natural:</label>
       <input type="checkbox" value="natural" />
     </div>
+    </div>
     <div class="single-ingredient-hypoallergenic">
+      <div class="form-item-beside">
       <label>Is hypoallergenic:</label>
       <input type="checkbox" value="hypoallergenic" />
     </div>
   </div>
-  <input class="add-related-name" type="button" value="Add related name" />
-  <button type="button">Save</button>
+      <div class="single-ingredient-description">
+      <div class="form-item-area">
+      <label>Ingredient Description:</label>
+      <div class="alert"> <div class="ingredient-description-alert"></div></div>
+      <textarea rows=10></textarea>
+    </div>
+  </div>
+  <div class="alert"> <div class="ingredient-general-alert"></div></div>
+    <div class="button-alike">
+      <button type="button">Save</button>
+    </div>
+  </div>
 </form>
 </div>
 {% endblock %}
