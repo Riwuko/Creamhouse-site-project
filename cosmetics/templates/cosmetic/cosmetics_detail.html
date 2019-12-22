@@ -1,37 +1,61 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block scripts %}
-    <script src="{% static 'cosmetics/scripts/cosmeticDetail.js' %}" async></script>
+    <script src="{% static 'cosmetics/scripts/cosmeticDetail.js'%}" defer></script>
 {% endblock %}
 {% block content %}
 <div class="content">
 
-<div>Name: {{ object.name }}</div>
-<div>Tager gender: {{ object.target_gender }}</div>
-<div>Description: {{ object.description }}</div>
-<div>Verified: {{ object.verified }}</div>
+<h1>Cosmetic {{ object.name }}</h1>
+<div class="form-item">Verified: {{ object.verified }}</div>
+<table class="form-item-table">
+<tr>
+<th>Tager gender </th>
+<th>{{ object.target_gender }}</th>
+</tr>
 {% if object.bodycosmetic %}
-    <div>Skin_type: {{ object.bodycosmetic.skin_type }}</div>
-    <div>Properties: {{ object.bodycosmetic.properties }}</div>
+<tr>
+    <th>Skin_type </th>
+    <th>{{ object.bodycosmetic.skin_type }}</th>
+</tr>
+<tr>
+    <th>Properties </th>
+    <th>{{ object.bodycosmetic.properties }}</th>
+</tr>
 {% elif object.facecosmetic %}
-    <div>Skin_type: {{ object.facecosmetic.skin_type }}</div>
-    <div>Skin_subtype: {{ object.facecosmetic.skin_subtype }}</div>
-    <div>Time_of_day: {{ object.facecosmetic.time_of_day  }}</div>
+    <div>Skin type: {{ object.facecosmetic.skin_type }}</div>
+    <div>Skin subtype: {{ object.facecosmetic.skin_subtype }}</div>
+    <div>Time of_day: {{ object.facecosmetic.time_of_day  }}</div>
     <div>Properties: {{ object.facecosmetic.properties }}</div>
 {% elif object.feetcosmetic %}
-    <div>Skin_type: {{ object.feetcosmetic.skin_type }}</div>
+    <div>Skin type: {{ object.feetcosmetic.skin_type }}</div>
     <div>Properties: {{ object.feetcosmetic.properties }}</div>
 {% elif object.handscosmetic %}
-    <div>Skin_type: {{ object.handscosmetic.skin_type }}</div>
+    <div>Skin type: {{ object.handscosmetic.skin_type }}</div>
     <div>Properties: {{ object.handscosmetic.properties }}</div>
 {% elif object.haircosmetic %}
-    <div>Hair_type: {{ object.haircosmetic.hair_type }}</div>
-    <div>Hair_problem: {{ object.haircosmetic.hair_problem }}</div>
-    <div>Properties: {{ object.haircosmetic.properties }}</div>
+<tr>
+    <th>Hair type </th>
+    <th> {{ object.haircosmetic.hair_type }}</th>
+</tr>
+<tr>
+    <th>Hair problem </th>
+    <th> {{ object.haircosmetic.hair_problem }}</th>
+</tr>
+<tr>
+    <th>Properties </th>
+    <th>{{object.haircosmetic.properties}}</th>
+
+</tr>
 {% endif %}
+
+</table>
+
+<div class="form-item-wide">Description: {{ object.description }}</div>
 <div class="results">
-    <button type="button">Uszanowanko</button>
+    <button type="button">Check composition!</button>
 </div>
+
 </div>
 
 
