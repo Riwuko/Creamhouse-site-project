@@ -22,11 +22,9 @@ import json
 class FilterCosmetic(View):
     def post(self, request):
         json_data = json.loads(request.body)
-        print(json_data)
         filter_values = {
             key: value for key, value in json_data.items() if value != 'all'
         }
-        print(filter_values)
         cosmetics_queryset = Cosmetic.objects.filter(**filter_values)
         filtered_cosmetics = {cosmetic.pk: cosmetic.name for cosmetic in cosmetics_queryset}
         return JsonResponse(filtered_cosmetics)
