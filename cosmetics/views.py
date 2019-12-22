@@ -140,6 +140,14 @@ class CosmeticDetailView(DetailView):
     model = Cosmetic
     template_name = 'cosmetic/cosmetics_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        properties = CosmeticProperties.objects.filter(
+            cosmetic__name=self.object.name
+        )
+        context['properties'] = [property.name for property in properties]
+        return context
+
 
 class CosmeticCheckComposition(View):
     def get(self, request, pk):

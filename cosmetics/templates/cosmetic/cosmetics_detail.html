@@ -18,21 +18,14 @@
     <th>Skin_type </th>
     <th>{{ object.bodycosmetic.skin_type }}</th>
 </tr>
-<tr>
-    <th>Properties </th>
-    <th>{{ object.bodycosmetic.properties }}</th>
-</tr>
 {% elif object.facecosmetic %}
     <div>Skin type: {{ object.facecosmetic.skin_type }}</div>
     <div>Skin subtype: {{ object.facecosmetic.skin_subtype }}</div>
     <div>Time of_day: {{ object.facecosmetic.time_of_day  }}</div>
-    <div>Properties: {{ object.facecosmetic.properties }}</div>
 {% elif object.feetcosmetic %}
     <div>Skin type: {{ object.feetcosmetic.skin_type }}</div>
-    <div>Properties: {{ object.feetcosmetic.properties }}</div>
 {% elif object.handscosmetic %}
     <div>Skin type: {{ object.handscosmetic.skin_type }}</div>
-    <div>Properties: {{ object.handscosmetic.properties }}</div>
 {% elif object.haircosmetic %}
 <tr>
     <th>Hair type </th>
@@ -42,12 +35,11 @@
     <th>Hair problem </th>
     <th> {{ object.haircosmetic.hair_problem }}</th>
 </tr>
+{% endif %}
 <tr>
     <th>Properties </th>
-    <th>{{object.haircosmetic.properties}}</th>
-
+    <th>{{ properties|join:', ' }}</th>
 </tr>
-{% endif %}
 
 </table>
 
