@@ -65,6 +65,13 @@ tr:nth-child(even) {
   right: 10px;
 }
 
+.top-message{
+  position: absolute;
+  top: 10px;
+  right: 20%;
+
+}
+
 .composition-table table{
   width: 800px;
   font-family: arial, sans-serif;
