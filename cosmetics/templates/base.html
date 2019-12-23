@@ -39,6 +39,7 @@
 	{% if user.is_authenticated %}
 	<div class="log-in-button">
 		<a href="{%url 'logout' %}"><img src="/static/images/buttons/log_out.png" alt="Log-out" title="Log out!" style="width:40%"></a>
+    </div>
 	{% else %}
 	<div class="top-message">Don't have account yet? <a href="{%url 'signup' %}"><b>Sign up!</b></a></div>
 	<div class="log-in-button">
