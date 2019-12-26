@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
@@ -29,27 +29,9 @@ from cosmetics.models import (
 from cosmetics.validation import validate_json
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'cosmetic/signup.html', {'form': form})
-
-def logout_view(request):
-    logout(request)
-    return redirect('home')
-
-
 def homeView(request):
-    return render(request, 'cosmetic/home.html',{})
+    return render(request, 'cosmetic/home.html', {})
+
 
 # @method_decorator(login_required, name='dispatch')
 class AddNewIngredient(View):
@@ -89,9 +71,11 @@ class AddNewCosmeticType(View):
             properties_objects.append(obj)
         ingredients_objects = []
         for ingredient in ingredients:
-            ingredient_name_object=IngredientName.objects.get(name=ingredient)
-            ingredients_objects.append(Ingredient.objects.get(pk=ingredient_name_object.pk))
-        
+            ingredient_name_object = IngredientName.objects.get(name=ingredient)
+            ingredients_objects.append(
+                Ingredient.objects.get(pk=ingredient_name_object.pk)
+            )
+
         cosmetic = self.model(**requested_json)
         cosmetic.save()
         for property in properties_objects:
@@ -152,9 +136,11 @@ class CosmeticDetailView(DetailView):
 class CosmeticCheckComposition(View):
     def get(self, request, pk):
         ingredients = Ingredient.objects.filter(cosmetic=pk)
-        ingredients_names=[]
+        ingredients_names = []
         for ingredient in ingredients:
-            ingredient_names = IngredientName.objects.filter(ingredient=ingredient.pk)
+            ingredient_names = IngredientName.objects.filter(
+                ingredient=ingredient.pk
+            )
             names = []
             for ingredient in ingredient_names:
                 names.append(ingredient.name)
@@ -163,17 +149,18 @@ class CosmeticCheckComposition(View):
             {
                 'ingredients': [
                     {
-                        'ingredient_names':ingredients_names[i],
+                        'ingredient_names': ingredients_names[i],
                         'description': ingredient.description,
                         'ingredient_type': ingredient.ingredient_type,
                         'natural': ingredient.natural,
                         'hypoallergenic': ingredient.hypoallergenic,
                         'verified': ingredient.verified,
                     }
-                    for i,ingredient in enumerate(ingredients)
+                    for i, ingredient in enumerate(ingredients)
                 ]
             }
         )
+
 
 class IngredientListView(ListView):
     model = IngredientName

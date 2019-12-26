@@ -22,28 +22,28 @@
 			<img src="/static/images/buttons/logo.png" style="width:80%">
 		</div>
 		<div class="sidebar-icons">
-	  <a href="{%url 'home' %}"><img src="/static/images/buttons/home.png" alt="Home" title="Home" style="width:35%"></a>
-	  <a href="{%url 'cosmetic_add' %}"><img src="/static/images/buttons/cosmetic_add.png" alt="Add cosmetic" title="Add cosmetic" style="width:40%"></a>
-	  <a href="{%url 'ingredient_add' %}"><img src="/static/images/buttons/ingredient_add.png" alt="Add ingredient" title="Add ingredient" style="width:40%"></a>
-	  <a href="{%url 'cosmetic' %}"><img src="/static/images/buttons/cosmetics.png" alt="Cosmetics list" title="Cosmetics list" style="width:40%"></a>
-	  <a href="{%url 'ingredient' %}"><img src="/static/images/buttons/ingredients.png" alt="Ingredients list" title="Ingredients list" style="width:40%"></a>
+	  <a href="{%url 'cosmetics:home' %}"><img src="/static/images/buttons/home.png" alt="Home" title="Home" style="width:35%"></a>
+	  <a href="{%url 'cosmetics:cosmetic_add' %}"><img src="/static/images/buttons/cosmetic_add.png" alt="Add cosmetic" title="Add cosmetic" style="width:40%"></a>
+	  <a href="{%url 'cosmetics:ingredient_add' %}"><img src="/static/images/buttons/ingredient_add.png" alt="Add ingredient" title="Add ingredient" style="width:40%"></a>
+	  <a href="{%url 'cosmetics:cosmetic' %}"><img src="/static/images/buttons/cosmetics.png" alt="Cosmetics list" title="Cosmetics list" style="width:40%"></a>
+	  <a href="{%url 'cosmetics:ingredient' %}"><img src="/static/images/buttons/ingredients.png" alt="Ingredients list" title="Ingredients list" style="width:40%"></a>
 	</div>
 	</div>
 
 	<div class="smaller_sidebar">
-	  <span class=menu-choice><a href="{%url 'cosmetic_add' %}">Add cosmetic</a></span>
-	  <span class=menu-choice><a href="{%url 'ingredient_add' %}">Add ingredient</a></span>
-	  <span class=menu-choice><a href="{%url 'cosmetic' %}">Cosmetics list</a></span>
-	  <span class=menu-choice><a href="{%url 'ingredient' %}">Ingredients list</a></span>
+	  <span class=menu-choice><a href="{%url 'cosmetics:cosmetic_add' %}">Add cosmetic</a></span>
+	  <span class=menu-choice><a href="{%url 'cosmetics:ingredient_add' %}">Add ingredient</a></span>
+	  <span class=menu-choice><a href="{%url 'cosmetics:cosmetic' %}">Cosmetics list</a></span>
+	  <span class=menu-choice><a href="{%url 'cosmetics:ingredient' %}">Ingredients list</a></span>
 	</div>
 	{% if user.is_authenticated %}
 	<div class="log-in-button">
-		<a href="{%url 'logout' %}"><img src="/static/images/buttons/log_out.png" alt="Log-out" title="Log out!" style="width:40%"></a>
+		<a href="{%url 'accounts:logout' %}"><img src="/static/images/buttons/log_out.png" alt="Log-out" title="Log out!" style="width:40%"></a>
     </div>
 	{% else %}
-	<div class="top-message">Don't have account yet? <a href="{%url 'signup' %}"><b>Sign up!</b></a></div>
+	<div class="top-message">Don't have account yet? <a href="{%url 'accounts:signup' %}"><b>Sign up!</b></a></div>
 	<div class="log-in-button">
-		<a href="{%url 'login' %}"><img src="/static/images/buttons/log_in.png" alt="Log-in" title="Log in!" style="width:40%"></a>
+		<a href="{%url 'accounts:login' %}"><img src="/static/images/buttons/log_in.png" alt="Log-in" title="Log in!" style="width:40%"></a>
 	</div>
 	{% endif %}
 
