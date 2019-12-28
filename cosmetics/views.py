@@ -1,12 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
 
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
 
 from cosmetics.json_schemas import (
     body_cosmetic_schema,
@@ -29,8 +27,8 @@ from cosmetics.models import (
 from cosmetics.validation import validate_json
 
 
-def homeView(request):
-    return render(request, 'cosmetic/home.html', {})
+class Home(TemplateView):
+    template_name = 'cosmetic/home.html'
 
 
 # @method_decorator(login_required, name='dispatch')
@@ -184,6 +182,5 @@ class IngredientDetailView(DetailView):
         names = []
         for ingredient in ingredient_names:
             names.append(ingredient.name)
-        print(names)
         context["ingredient_names"] = names
         return context

@@ -26,16 +26,16 @@ from cosmetics.views import (
     CosmeticCheckComposition,
     CosmeticDetailView,
     CosmeticListView,
-    homeView,
     IngredientDetailView,
     IngredientListView,
+    Home,
 )
 from cosmetics.views_api import CheckIngredient, FilterCosmetic
 
 app_name = 'cosmetics'
 
 urlpatterns = [
-    path('ingredient/add', AddNewIngredient.as_view(), name='ingredient_add'),
+    path('home', Home.as_view(), name='home'),
     path('cosmetic/add', AddNewCosmetic.as_view(), name='cosmetic_add'),
     path(
         'cosmetic/add/body',
@@ -62,19 +62,19 @@ urlpatterns = [
         AddNewCosmeticHair.as_view(),
         name='cosmetic_add_hair',
     ),
-    path('home', homeView, name='home'),
     path(
         'ingredient/check/name',
         CheckIngredient.as_view(),
         name='ingredient_check_name',
     ),
     path('cosmetic', CosmeticListView.as_view(), name='cosmetic'),
+    path('cosmetic/filter', FilterCosmetic.as_view(), name='cosmetic_filter'),
     path('cosmetic/show/<int:pk>', CosmeticDetailView.as_view()),
     path(
         'api/cosmetic/<int:pk>/check-composition',
         CosmeticCheckComposition.as_view(),
     ),
-    path('cosmetic/filter', FilterCosmetic.as_view(), name='cosmetic_filter'),
+    path('ingredient/add', AddNewIngredient.as_view(), name='ingredient_add'),
     path('ingredient', IngredientListView.as_view(), name='ingredient'),
     path('ingredient/show/<int:pk>', IngredientDetailView.as_view()),
 ]
