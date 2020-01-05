@@ -7,7 +7,7 @@ const changeFormTemplate = () => {
   const ingredientNatural = chooseIngredientNatural.checked;
   const ingredientHypoallergenic = chooseIngredientHypoallergenic.checked;
   
-  changeIngredientsFilters();
+  // changeIngredientsFilters();
 
   console.log(ingredientType, ingredientNatural, ingredientHypoallergenic);
 };
@@ -26,6 +26,28 @@ const getIngredientsFiltersData = () => {
     	hypoallergenic: ingredientHypoallergenic,
   	}
 };
+
+const showFilteredIngredients = response => {
+  ingredients = [];
+  for (ingredientPk in response) {
+    ingredients.push(`<li><a href="/ingredient/show/${ingredientPk}">${response[ingredientPk]}</a></li>`)
+  }
+  return ingredients.join('');
+};
+
+const changeIngredientsFilters = async () => {
+  const jsonData = getIngredientsFiltersData();
+    console.log(jsonData);
+  const url = '/ingredient/filter';
+  const response = await requestPost(url, jsonData);
+  const filteredIngredients = showFilteredIngredients(response);
+  const ingredientsList = document.querySelector('ul');
+  ingredientsList.innerHTML = filteredIngredients;
+};
+
+const filterButton = document.querySelector('form button');
+filterButton.addEventListener('click', changeIngredientsFilters);
+
 
 
 

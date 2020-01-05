@@ -28,3 +28,11 @@ class FilterCosmetic(View):
         cosmetics_queryset = Cosmetic.objects.filter(**filter_values)
         filtered_cosmetics = {cosmetic.pk: cosmetic.name for cosmetic in cosmetics_queryset}
         return JsonResponse(filtered_cosmetics)
+
+class FilterIngredient(View):
+    def post(self, request):
+        json_data = json.loads(request.body)
+        json_prepared = {f'ingredient__{key}': value for key, value in json_data.items() if value != 'all'}
+        ingredient_queryset = IngredientName.objects.filter(**json_prepared)
+        filtered_ingredients = {ingredient.pk : ingredient.name  for ingredient in ingredient_queryset}
+        return JsonResponse(filtered_ingredients)

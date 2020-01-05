@@ -5,7 +5,6 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
 
-
 from cosmetics.json_schemas import (
     body_cosmetic_schema,
     face_cosmetic_schema,
@@ -31,7 +30,7 @@ class Home(TemplateView):
     template_name = 'cosmetic/home.html'
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class AddNewIngredient(View):
     def get(self, request):
         return render(request, 'cosmetic/ingredient_create.html', {})
@@ -50,7 +49,7 @@ class AddNewIngredient(View):
         )
         return JsonResponse({'message': ':)'})
 
-
+@method_decorator(login_required, name='dispatch')
 class AddNewCosmetic(TemplateView):
     template_name = 'cosmetic/cosmetic_create.html'
 
@@ -184,3 +183,6 @@ class IngredientDetailView(DetailView):
             names.append(ingredient.name)
         context["ingredient_names"] = names
         return context
+
+class Success(TemplateView):
+    template_name = 'cosmetic/success.html'

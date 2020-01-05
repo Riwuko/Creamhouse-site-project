@@ -29,8 +29,9 @@ from cosmetics.views import (
     IngredientDetailView,
     IngredientListView,
     Home,
+    Success,
 )
-from cosmetics.views_api import CheckIngredient, FilterCosmetic
+from cosmetics.views_api import CheckIngredient, FilterCosmetic, FilterIngredient
 
 app_name = 'cosmetics'
 
@@ -76,5 +77,7 @@ urlpatterns = [
     ),
     path('ingredient/add', AddNewIngredient.as_view(), name='ingredient_add'),
     path('ingredient', IngredientListView.as_view(), name='ingredient'),
+    path('ingredient/filter', FilterIngredient.as_view(), name='ingredient_filter'),
     path('ingredient/show/<int:pk>', IngredientDetailView.as_view()),
+    path('success', Success.as_view(), name='success'),
 ]
