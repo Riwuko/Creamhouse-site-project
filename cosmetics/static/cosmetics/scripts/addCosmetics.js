@@ -406,7 +406,6 @@ const getCosmeticData = () => {
   }
 };
 
-
 const checkCompability= (name,element,regex,alert) => {
   const correct=regex.test(element);
   const stringPath = 'form div.cosmetic-'.concat(name).concat('-alert'); 
@@ -437,7 +436,7 @@ const addCosmetic = async () => {
   console.log(jsonData);
   resp = await requestPost(`/cosmetic/add/${jsonData['cosmetic_type']}`, jsonData);
   console.log(resp);
-  // window.location.replace('/')
+  window.location.replace('/success')
 }
 };
 

@@ -60,7 +60,7 @@ const initialValidate = () => {
   }
   const description = jsonData['description'];
   regex = /.{10,5000}/;
-  if (!checkCompability("description",description,regex,"Enter correct name (between 10 and 5000 characters)")){
+  if (!checkCompability("description",description,regex,"Enter correct description (between 10 and 5000 characters)")){
     correct = false;
   }
   const ingredient_type =  jsonData['ingredient_type'];
@@ -76,7 +76,7 @@ const addIngredient = async () => {
   const jsonData = getIngredientData();
   const resp = await requestPost('/ingredient/add', jsonData);
   console.log(resp);
-  // window.location.replace('/')
+  window.location.replace('/success')
 }
 };
 
