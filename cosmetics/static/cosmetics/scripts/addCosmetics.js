@@ -431,7 +431,7 @@ const initialValidate = () => {
 };
 
 const addCosmetic = async () => {
-  if(initialValidate){
+  if(initialValidate()){
   const jsonData = getCosmeticData();
   console.log(jsonData);
   resp = await requestPost(`/cosmetic/add/${jsonData['cosmetic_type']}`, jsonData);
