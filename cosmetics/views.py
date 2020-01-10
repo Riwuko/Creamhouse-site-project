@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 
 from cosmetics.json_schemas import (
     body_cosmetic_schema,
@@ -48,6 +49,7 @@ class AddNewIngredient(View):
             ]
         )
         return JsonResponse({'message': ':)'})
+
 
 @method_decorator(login_required, name='dispatch')
 class AddNewCosmetic(TemplateView):
@@ -184,5 +186,12 @@ class IngredientDetailView(DetailView):
         context["ingredient_names"] = names
         return context
 
+
 class Success(TemplateView):
     template_name = 'cosmetic/success.html'
+
+
+class RemoveCosmetic(DeleteView):
+    model = Cosmetic
+    success_url = reverse_lazy('cosmetics:home')
+    template_name = 'cosmetic/confirm_cosmetic_remove.html'
