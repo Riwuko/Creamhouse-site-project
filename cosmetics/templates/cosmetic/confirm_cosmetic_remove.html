@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content">
+        <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm">
+        </form>
+
+        <form action="/cosmetic/show/{{ object.pk }}" method="get">
+            <input type="submit" value="Nope">
+        </form>
+    </div>
+{% endblock %}
