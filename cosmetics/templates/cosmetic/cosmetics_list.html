@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block scripts %}
+<script src="{% static 'cosmetics/scripts/pagination.js' %}"></script>
 <script src="{% static 'cosmetics/scripts/cosmeticsList.js' %}" defer></script>
 {% endblock %} {% block content %}
 <div class="content">
@@ -46,6 +47,6 @@
     <li>No {{ object_type }} yet.</li>
 {% endfor %}
 </ul>
-
+{% include 'cosmetic/pagination.html' %}
 </div>
 {% endblock %}

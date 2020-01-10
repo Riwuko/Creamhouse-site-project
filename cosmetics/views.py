@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.conf import settings
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -112,6 +113,7 @@ class AddNewCosmeticFace(AddNewCosmeticType):
 class CosmeticListView(ListView):
     model = Cosmetic
     template_name = 'cosmetic/cosmetics_list.html'
+    paginate_by = settings.PAGINATE_BY
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -164,6 +166,7 @@ class CosmeticCheckComposition(View):
 class IngredientListView(ListView):
     model = IngredientName
     template_name = 'cosmetic/ingredients_list.html'
+    paginate_by = settings.PAGINATE_BY
 
     def get_queryset(self):
         queryset = super().get_queryset()

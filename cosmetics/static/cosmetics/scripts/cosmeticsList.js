@@ -235,24 +235,26 @@ const getCosmeticsFiltersData = () => {
 
 
 const showFilteredCosmetics = response => {
-  cosmetics = [];
-  for (cosmeticPk in response) {
-    cosmetics.push(`<li><a href="/cosmetic/show/${cosmeticPk}">${response[cosmeticPk]}</a></li>`)
+  cosmeticsArray = [];
+  const {cosmetics} = response;
+  for (cosmeticPk in cosmetics) {
+    cosmeticsArray.push(`<li><a href="/cosmetic/show/${cosmeticPk}">${cosmetics[cosmeticPk]}</a></li>`)
   }
-  return cosmetics.join('');
+  return cosmeticsArray.join('');
 };
 
-const changeCosmeticFilters = async () => {
-  const jsonData = getCosmeticsFiltersData();
-    console.log(jsonData);
+const changeCosmeticFilters = async pageNumber => {
+  const jsonData = {cosmeticFilterData: getCosmeticsFiltersData(), page: pageNumber};
   const url = '/cosmetic/filter';
   const response = await requestPost(url, jsonData);
   const filteredCosmetics = showFilteredCosmetics(response);
   const cosmeticsList = document.querySelector('ul');
+  changePagination(response);
   cosmeticsList.innerHTML = filteredCosmetics;
 };
 
 const filterButton = document.querySelector('form button');
-filterButton.addEventListener('click', changeCosmeticFilters);
+filterButton.addEventListener('click', () => changeCosmeticFilters(1));
+
 
 
