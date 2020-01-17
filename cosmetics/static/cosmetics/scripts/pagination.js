@@ -1,11 +1,11 @@
 const changePagination = response => {
   const paginationElementsArray = [];
   if (response['previous_page']) {
-    paginationElementsArray.push(`<span id="firstPage" data-page="1">&laquo; first</span><span id="previousPage" data-page="${response['previous_page']}">previous</span>`)
+    paginationElementsArray.push(`<span class="pagination-panel"><span id="firstPage" data-page="1">&laquo; first</span></span><span class="pagination-panel"><span id="previousPage" data-page="${response['previous_page']}">previous</span></span>`)
   }
-  paginationElementsArray.push(`<span>Page ${response['current_page']} of ${response['last_page']}.</span>`);
+  paginationElementsArray.push(`<span class="pagination-panel-no-a"><span>Page ${response['current_page']} of ${response['last_page']}.</span></span>`);
   if (response['next_page']) {
-    paginationElementsArray.push(`<span id="nextPage" data-page="${response['next_page']}">next</span><span id="lastPage" data-page="${response['last_page']}">last &raquo;</span>`)
+    paginationElementsArray.push(`<span class="pagination-panel"><span id="nextPage" data-page="${response['next_page']}">next</span></span><span class="pagination-panel"><span id="lastPage" data-page="${response['last_page']}">last &raquo;</span></span>`)
   }
   document.querySelector('div.pagination span.step-links').innerHTML = paginationElementsArray.join('');
 

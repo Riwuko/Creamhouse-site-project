@@ -2,12 +2,12 @@
 {% block content %}
     <div class="content">
         <form method="post">{% csrf_token %}
-        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <p>Are you sure you want to delete ingredient?</p>
         <span class = "yes-no">
         <input type="submit" value="Confirm">
         </form>
 
-        <form action="/cosmetic/show/{{ object.pk }}" method="get">
+        <form action="/ingredient/show/{{ object.pk }}" method="get">
             <input type="submit" value="Cancel">
         </form>
     </span>

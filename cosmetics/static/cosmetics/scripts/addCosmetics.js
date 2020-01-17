@@ -55,6 +55,7 @@ const bodyCosmeticForm = `
     <div class="single-cosmetic-skin-type">
     <div class="form-item">
       <label>Cosmetic Skin Type:</label>
+      <div class="alert"> <div class="cosmetic-skin-type-alert"></div></div>
         <select class="single-cosmetic-skin-type">
         <option value="dehyderated" id="dehyderated">Dehyderated skin</option>
         <option value="imperfections" id="imperfections">Imperfections</option>
@@ -69,6 +70,7 @@ const bodyCosmeticForm = `
     <div class="single-cosmetic-properties">
     <div class="form-item">
       <legend>Choose cosmetic properties:</legend>
+      <div class="alert"> <div class="cosmetic-properties-alert"></div></div>
         <div>
           <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing">
           <label for="moisturiing">Moisturizing</label>
@@ -97,6 +99,7 @@ const faceCosmeticForm = `
       <div class="single-cosmetic-time-of-day">
     <div class="form-item">
       <label>Time of day:</label>
+      <div class="alert"> <div class="cosmetic-time-of-day-alert"></div></div>
         <div>
           <input type="radio" id="both" name="time-day">
           <label for="both">Both</label>
@@ -110,6 +113,7 @@ const faceCosmeticForm = `
     <div class="single-cosmetic-skin-type">  
     <div class="form-item-wide">
       <label>Cosmetic Skin Type: </label>
+      <div class="alert"> <div class="cosmetic-skin-type-alert"></div></div>
           <div>
             <input type="radio" id="dry" name="skin-type">
             <label for="dry">Dry</label>
@@ -128,6 +132,7 @@ const faceCosmeticForm = `
     <div class = single-cosmetic-properties>
     <div class="form-item">
       <legend>Choose cosmetic properties:</legend>
+      <div class="alert"> <div class="cosmetic-properties-alert"></div></div>
         <div>
           <input class="property" type="checkbox" id="moisturiing" name="property" value="moisturizing"
           <label for="moisturiing">Moisturizing</label>
@@ -171,6 +176,7 @@ const hairCosmeticForm = `
     <div class="single-cosmetic-hair-type">
       <div class="form-item">
       <label>Cosmetic hair type:</label>
+      <div class="alert"> <div class="cosmetic-hair-type-alert"></div></div>
         <div>
           <input type="radio" id="high-porosity" name="hair-type">
           <label for="high-porosity">High porosity</label>
@@ -208,6 +214,7 @@ const hairCosmeticForm = `
     <div class="single-cosmetic-properties">
       <div class="form-item-wide">
       <legend>Choose cosmetic properties:</legend>
+      <div class="alert"> <div class="cosmetic-properties-alert"></div></div>
       <div>
         <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
         <label for="moisturizing">Moisturizing</label>
@@ -242,6 +249,7 @@ const handsFeetCosmeticForm = `
     <div class="single-cosmetic-skin-type"> 
     <div class="form-item-wide"> 
       <label>Cosmetic Skin Type:</label>
+      <div class="alert"> <div class="cosmetic-skin-type-alert"></div></div>
           <div>
             <input type="radio" id="dry" name="skin-type">
             <label for="dry">Dry</label>
@@ -255,9 +263,10 @@ const handsFeetCosmeticForm = `
           </div>
     </div>
 
-    <div class="single-cosmetic-properties" name="single-cosmetic-propeties">
+    <div class="single-cosmetic-properties" name="single-cosmetic-properties">
     <div class="form-item">
       <legend>Choose cosmetic properties:</legend>
+      <div class="alert"> <div class="cosmetic-properties-alert"></div></div>
         <div>
           <input class="property" type="checkbox" id="moisturizing" name="property" value="moisturizing"
           <label for="moisturizing">Moisturizing</label>
@@ -419,12 +428,42 @@ const checkCompability= (name,element,regex,alert) => {
 
 const initialValidate = () => {
   var correct=true;
-  const jsonData = getCosmeticData();
-  const name =  jsonData['name'];
+  const cosmeticType = chooseCosmeticType.value;
+  const name = document.querySelector('div.single-cosmetic-name input').value;
   var regex = /.{3,50}/;
   if(!checkCompability("name",name,regex,"Enter correct name (between 3 and 50 characters)")){
     correct = false;
   }
+  regex = /^((?!null).)*$/;
+   if(cosmeticType != 'hair' && cosmeticType != 'body' ){
+    const skin_type = document.querySelector('div.single-cosmetic-skin-type input:checked');
+      var stringify = (skin_type==null)?"null":toString(skin_type)
+      if(!checkCompability("skin-type",stringify,regex,"Select correctly!")){
+        correct = false;
+      }
+    
+  }else if (cosmeticType == 'hair'){
+    const hair_type = document.querySelector('div.single-cosmetic-hair-type input:checked');
+    stringify = (hair_type==null)?"null":toString(hair_type)
+      if(!checkCompability("hair-type",stringify,regex,"Select correctly!")){
+        correct = false;
+      }
+  }
+  if(cosmeticType=="face"){
+    const time_of_day = document.querySelector('div.single-cosmetic-time-of-day input:checked');
+    stringify = (time_of_day==null)?"null":toString(time_of_day)
+      if(!checkCompability("time-of-day",stringify,regex,"Select correctly!")){
+        correct = false;
+      }
+  }
+
+
+  const properties = document.querySelector('.property:checked');
+  stringify = (properties==null)?"null":toString(properties)
+      if(!checkCompability("properties",stringify,regex,"Select at least one!")){
+        correct = false;
+      }
+    
 
   return correct;
 };

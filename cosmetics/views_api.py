@@ -51,13 +51,28 @@ class FilterCosmetic(View):
 class FilterIngredient(View):
     def post(self, request):
         json_data = json.loads(request.body)
+        current_page = json_data.get('page', 1)
+        ingredient_filter_data = json_data['ingredientFilterData']
         json_prepared = {
             f'ingredient__{key}': value
-            for key, value in json_data.items()
+            for key, value in ingredient_filter_data.items()
             if value != 'all'
         }
         ingredient_queryset = IngredientName.objects.filter(**json_prepared)
+        paginator = Paginator(ingredient_queryset, settings.PAGINATE_BY)
+        paged_ingredients = paginator.page(current_page)
         filtered_ingredients = {
-            ingredient.pk: ingredient.name for ingredient in ingredient_queryset
+            'ingredients': {
+            ingredient.pk: ingredient.name for ingredient in paged_ingredients
+            },
+            'current_page': current_page,
+                'previous_page': paged_ingredients.previous_page_number()
+                if paged_ingredients.has_previous()
+                else None,
+                'next_page': paged_ingredients.next_page_number()
+                if paged_ingredients.has_next()
+                else None,
+                'last_page': paginator.num_pages,
         }
+
         return JsonResponse(filtered_ingredients)

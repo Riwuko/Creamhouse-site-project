@@ -31,6 +31,7 @@ from cosmetics.views import (
     Home,
     Success,
     RemoveCosmetic,
+    RemoveIngredient,
 )
 from cosmetics.views_api import (
     CheckIngredient,
@@ -90,4 +91,5 @@ urlpatterns = [
     path('ingredient/show/<int:pk>', IngredientDetailView.as_view()),
     path('success', Success.as_view(), name='success'),
     path('cosmetic/delete/<int:pk>', RemoveCosmetic.as_view(), name='remove_cosmetic'),
+    path('ingredient/delete/<int:pk>', RemoveIngredient.as_view(), name='remove_ingredient'),
 ]

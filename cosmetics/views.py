@@ -197,4 +197,9 @@ class Success(TemplateView):
 class RemoveCosmetic(DeleteView):
     model = Cosmetic
     success_url = reverse_lazy('cosmetics:home')
-    template_name = 'cosmetic/confirm_cosmetic_remove.html'
+    template_name = 'cosmetic/confirm_ingredient_remove.html'
+
+class RemoveIngredient(DeleteView):
+    model = Ingredient
+    success_url = reverse_lazy('cosmetics:home')
+    template_name = 'cosmetic/confirm_ingredient_remove.html'

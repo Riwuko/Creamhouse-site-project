@@ -27,5 +27,14 @@
 </table>
 
 <div class="form-item-wide">Description: {{object.description}}</div>
+
+<div class="bottom-button">
+<form action="/ingredient/delete/{{ object.pk }}" method="get">
+  <input type="submit" value="Remove">
+</form>
+</div>
+
+
+
 </div>
 {% endblock %}

@@ -6,10 +6,7 @@ const changeFormTemplate = () => {
   const ingredientType = chooseIngredientType.value;
   const ingredientNatural = chooseIngredientNatural.checked;
   const ingredientHypoallergenic = chooseIngredientHypoallergenic.checked;
-  
-  // changeIngredientsFilters();
 
-  console.log(ingredientType, ingredientNatural, ingredientHypoallergenic);
 };
 chooseIngredientType.addEventListener('change', changeFormTemplate);
 chooseIngredientNatural.addEventListener('change',changeFormTemplate);
@@ -28,25 +25,27 @@ const getIngredientsFiltersData = () => {
 };
 
 const showFilteredIngredients = response => {
-  ingredients = [];
-  for (ingredientPk in response) {
-    ingredients.push(`<li><a href="/ingredient/show/${ingredientPk}">${response[ingredientPk]}</a></li>`)
+  ingredientsArray = [];
+  const {ingredients} = response;
+  for (ingredientPk in ingredients) {
+    ingredientsArray.push(`<li><a href="/ingredient/show/${ingredientPk}">${ingredients[ingredientPk]}</a></li>`)
   }
-  return ingredients.join('');
+  return ingredientsArray.join('');
 };
 
-const changeIngredientsFilters = async () => {
-  const jsonData = getIngredientsFiltersData();
-    console.log(jsonData);
+const changeIngredientsFilters = async pageNumber  => {
+  const jsonData = {ingredientFilterData: getIngredientsFiltersData(), page:pageNumber};
+  console.log(jsonData);
   const url = '/ingredient/filter';
   const response = await requestPost(url, jsonData);
   const filteredIngredients = showFilteredIngredients(response);
   const ingredientsList = document.querySelector('ul');
+  changePagination(response);
   ingredientsList.innerHTML = filteredIngredients;
 };
 
 const filterButton = document.querySelector('form button');
-filterButton.addEventListener('click', changeIngredientsFilters);
+filterButton.addEventListener('click', () => changeIngredientsFilters(1));
 
 
 

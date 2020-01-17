@@ -21,6 +21,11 @@ html {
 
 }
 
+.bottom-button{
+  position: absolute;
+  bottom: 10%;
+}
+
 .alert{
   width: 500px;
   font-size: 12px;
@@ -177,6 +182,24 @@ tr:nth-child(even) {
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
+}
+
+.pagination-panel{
+ margin-right: 20px;
+ color: white;
+  text-decoration: underline;
+}
+
+.pagination-panel a{
+  margin-right: 20px;
+  color: white;
+  text-decoration: underline;
+}
+
+.pagination-panel-no-a{
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
 }
 
 select {
