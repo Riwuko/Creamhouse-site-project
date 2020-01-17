@@ -14,7 +14,7 @@ class CheckIngredient(View):
         names = list(
             IngredientName.objects.filter(
                 name__istartswith=ingredient
-            ).values_list('name', flat=True)
+            ).values_list('name', flat=True)[:5]
         )
         return JsonResponse({'ingredients': names})
 
