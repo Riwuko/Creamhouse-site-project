@@ -260,3 +260,24 @@ a {
   }
   div.content {margin: 1px;}
 }
+
+.next-cosmetic-ingredient ul {
+  display: none;
+}
+.next-cosmetic-ingredient:hover ul {
+  display: block;
+  position: absolute;
+  margin-top: 38px;
+  z-index: 50;
+  list-style-type: none;
+}
+
+.next-cosmetic-ingredient ul li {
+  width: 240px;
+  height: 25px;
+  background-color: #5897fb;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1px;
+  margin-left: -40px;
+}
