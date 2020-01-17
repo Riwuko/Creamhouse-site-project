@@ -283,12 +283,14 @@ const partialCosmeticForm = {
 };
 
 const changeSuggestions = async ingredientId => {
-  var inputElement = document.querySelector(`div#${ingredientId} input`)
+  const inputElement = document.querySelector(`div#${ingredientId} input`);
   const inputValue = inputElement.value;
   const { ingredients } = await requestGet('/ingredient/check/name', `ingredient=${inputValue}`);
-  var awesomplete = new Awesomplete(inputElement,{minChars: 1});
-  inputElement.setAttribute('data-list', ingredients);
-  awesomplete.evaluate();
+  const ingredientElement = inputElement.parentElement;
+  const suggestionList = ingredientElement.querySelector('ul.suggestions');
+  const suggestions = [];
+  ingredients.forEach(e => suggestions.push(`<li>${e}</li>`));
+  suggestionList.innerHTML = suggestions.join('');
 };
 
 window.ingredientId = 1;
@@ -297,11 +299,8 @@ const addNextIngredient = ingredientElement => {
         <div class="new-ingredient">
         <div class="form-item-font-black">
         <span class="extra-white-element"><label for="name">Add ingredient:</label></span>
-        <input type="text" name="ingredient-name>
-               </div>
-        <script type="text/javascript" src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
-        <ul></ul>
-
+        <input type="text" name="ingredient-name" autocomplete="off">
+        <ul class="suggestions"></ul>
         </div>`;
   const div = document.createElement('div');
   div.classList.add('next-cosmetic-ingredient');
